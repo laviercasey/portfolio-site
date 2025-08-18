@@ -1,0 +1,35 @@
+{
+  "name": "portfolio-site",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "start": "next start",
+    "lint": "next lint",
+    "build": "next build",
+    "predeploy": "npm run build && echo \"\" > out/.nojekyll",
+    "deploy": "gh-pages -d out"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@react-spring/web": "^10.0.1",
+    "framer-motion": "^12.23.6",
+    "next": "15.4.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-helmet-async": "^2.0.5",
+    "react-spring": "^10.0.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.4.1",
+    "gh-pages": "^6.3.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
