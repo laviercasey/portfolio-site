@@ -13,12 +13,14 @@ import {
 } from 'lucide-react';
 import { ClipReveal } from '@/shared/ui';
 import type { HomepageContent } from '@/entities/content';
+import type { Project } from '@/entities/project';
 
 interface AboutSectionProps {
   content: HomepageContent;
+  projects?: Project[];
 }
 
-export default function AboutSection({ content }: AboutSectionProps) {
+export default function AboutSection({ content, projects = [] }: AboutSectionProps) {
   const t = useTranslations('about');
   const locale = useLocale();
   const shouldReduceMotion = useReducedMotion();
@@ -29,12 +31,13 @@ export default function AboutSection({ content }: AboutSectionProps) {
   const hasFullBio = Boolean(bioFull && bioFull.trim().length > 0 && bioFull.trim() !== bio.trim());
   const { stats } = content.about;
   const vis = content.visibility;
+  const githubStars = projects.reduce((sum, p) => sum + (p.stars ?? 0), 0);
 
   const allStats = [
     { key: 'showStatProjects'      as const, icon: FolderKanban,   value: `${stats.projects}+`,       label: t('projects'),     color: 'text-primary',     bg: 'bg-primary/12' },
     { key: 'showStatYears'         as const, icon: Briefcase,      value: `${stats.yearsExperience}+`, label: t('experience'),   color: 'text-amber-400',   bg: 'bg-amber-500/12' },
     { key: 'showStatCertificates'  as const, icon: GraduationCap,  value: `${stats.certificates}+`,    label: t('certificates'), color: 'text-emerald-400', bg: 'bg-emerald-500/12' },
-    { key: 'showStatGithubStars'   as const, icon: Star,           value: `${stats.githubStars}`,      label: t('githubStars'),  color: 'text-yellow-400',  bg: 'bg-yellow-500/12' },
+    { key: 'showStatGithubStars'   as const, icon: Star,           value: `${githubStars}`,            label: t('githubStars'),  color: 'text-yellow-400',  bg: 'bg-yellow-500/12' },
     { key: 'showStatHabrArticles'  as const, icon: BookOpen,       value: `${stats.habrArticles}`,     label: t('habrArticles'), color: 'text-cyan-400',    bg: 'bg-cyan-500/12' },
   ];
   const statItems = allStats.filter(s => vis?.[s.key] !== false);

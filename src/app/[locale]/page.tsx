@@ -46,7 +46,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       )}
 
-      <AboutSection content={content} />
+      <AboutSection content={content} projects={allProjects} />
       <ProjectCarousel projects={projects} visibility={vis} />
       {vis?.showHowIWork !== false && <HowIWorkSection content={content} />}
       <EducationSnapshot career={career} />

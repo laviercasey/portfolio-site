@@ -52,6 +52,14 @@ func run(log *slog.Logger) error {
 	inquirySvc := service.NewInquiryService(db)
 	uploadSvc := service.NewUploadService(db, cfg.UploadDir)
 
+	ghStarsSvc := service.NewGithubStarsService(
+		db,
+		cfg.GithubToken,
+		time.Duration(cfg.GithubStarsSyncIntervalHours)*time.Hour,
+		log,
+	)
+	ghStarsSvc.Start(ctx)
+
 	cacheTTL := time.Duration(cfg.UmamiCacheTTLSeconds) * time.Second
 	analyticsSvc, err := service.NewAnalyticsService(
 		cfg.UmamiAPIURL,

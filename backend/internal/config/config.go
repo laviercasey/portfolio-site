@@ -21,6 +21,9 @@ type Config struct {
 	UmamiAPIKey          string `mapstructure:"UMAMI_API_KEY"`
 	UmamiWebsiteID       string `mapstructure:"UMAMI_WEBSITE_ID"`
 	UmamiCacheTTLSeconds int    `mapstructure:"UMAMI_CACHE_TTL_SECONDS"`
+
+	GithubToken                  string `mapstructure:"GITHUB_TOKEN"`
+	GithubStarsSyncIntervalHours int    `mapstructure:"GITHUB_STARS_SYNC_INTERVAL_HOURS"`
 }
 
 func Load() (*Config, error) {
@@ -32,6 +35,7 @@ func Load() (*Config, error) {
 	v.SetDefault("UPLOAD_DIR", "./uploads")
 	v.SetDefault("PORT", "8080")
 	v.SetDefault("CORS_ORIGINS", "http://localhost:3000")
+	v.SetDefault("GITHUB_STARS_SYNC_INTERVAL_HOURS", 6)
 
 	_ = v.ReadInConfig()
 
@@ -47,6 +51,9 @@ func Load() (*Config, error) {
 		UmamiAPIKey:          v.GetString("UMAMI_API_KEY"),
 		UmamiWebsiteID:       v.GetString("UMAMI_WEBSITE_ID"),
 		UmamiCacheTTLSeconds: v.GetInt("UMAMI_CACHE_TTL_SECONDS"),
+
+		GithubToken:                  v.GetString("GITHUB_TOKEN"),
+		GithubStarsSyncIntervalHours: v.GetInt("GITHUB_STARS_SYNC_INTERVAL_HOURS"),
 	}
 
 	if err := cfg.validate(); err != nil {
