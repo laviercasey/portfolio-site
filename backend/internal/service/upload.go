@@ -72,17 +72,21 @@ func (s *UploadService) Upload(ctx context.Context, header *multipart.FileHeader
 		return nil, fmt.Errorf("seek file: %w", err)
 	}
 
-	if err := os.MkdirAll(s.uploadDir, 0o755); err != nil {
+	if err := os.MkdirAll(s.uploadDir, 0o750); err != nil {
 		return nil, fmt.Errorf("create upload dir: %w", err)
 	}
+
+	root, err := os.OpenRoot(s.uploadDir)
+	if err != nil {
+		return nil, fmt.Errorf("open upload root: %w", err)
+	}
+	defer root.Close()
 
 	ext := mimeToExt[mimeType]
 	fileID := uuid.New()
 	filename := fileID.String() + ext
 
-	destPath := filepath.Join(s.uploadDir, filepath.Base(filename))
-
-	dst, err := os.Create(destPath)
+	dst, err := root.Create(filename)
 	if err != nil {
 		return nil, fmt.Errorf("create destination file: %w", err)
 	}
@@ -90,14 +94,14 @@ func (s *UploadService) Upload(ctx context.Context, header *multipart.FileHeader
 	written, err := io.Copy(dst, src)
 	if err != nil {
 		_ = dst.Close()
-		if rerr := os.Remove(destPath); rerr != nil && !errors.Is(rerr, os.ErrNotExist) {
-			slog.Error("failed to remove orphaned upload", "path", destPath, "error", rerr)
+		if rerr := root.Remove(filename); rerr != nil && !errors.Is(rerr, os.ErrNotExist) {
+			slog.Error("failed to remove orphaned upload", "filename", filename, "error", rerr)
 		}
 		return nil, fmt.Errorf("write file: %w", err)
 	}
 	if err := dst.Close(); err != nil {
-		if rerr := os.Remove(destPath); rerr != nil && !errors.Is(rerr, os.ErrNotExist) {
-			slog.Error("failed to remove orphaned upload", "path", destPath, "error", rerr)
+		if rerr := root.Remove(filename); rerr != nil && !errors.Is(rerr, os.ErrNotExist) {
+			slog.Error("failed to remove orphaned upload", "filename", filename, "error", rerr)
 		}
 		return nil, fmt.Errorf("close destination file: %w", err)
 	}
@@ -112,8 +116,8 @@ RETURNING id, filename, original_name, mime_type, size, url, created_at`,
 		filename, cleanOriginalName(header.Filename), mimeType, written, urlPath,
 	).Scan(&m.ID, &m.Filename, &m.OriginalName, &m.MimeType, &m.Size, &m.URL, &m.CreatedAt)
 	if err != nil {
-		if rerr := os.Remove(destPath); rerr != nil && !errors.Is(rerr, os.ErrNotExist) {
-			slog.Error("failed to remove orphaned upload", "path", destPath, "error", rerr)
+		if rerr := root.Remove(filename); rerr != nil && !errors.Is(rerr, os.ErrNotExist) {
+			slog.Error("failed to remove orphaned upload", "filename", filename, "error", rerr)
 		}
 		return nil, fmt.Errorf("insert media record: %w", err)
 	}
@@ -166,9 +170,14 @@ func (s *UploadService) Delete(ctx context.Context, id uuid.UUID) error {
 		return pgx.ErrNoRows
 	}
 
-	filePath := filepath.Join(s.uploadDir, filepath.Base(filename))
-	if err := os.Remove(filePath); err != nil && !errors.Is(err, os.ErrNotExist) {
-		slog.Error("failed to remove orphaned upload", "path", filePath, "error", err)
+	root, err := os.OpenRoot(s.uploadDir)
+	if err != nil {
+		slog.Error("failed to open upload root", "error", err)
+		return nil
+	}
+	defer root.Close()
+	if err := root.Remove(filename); err != nil && !errors.Is(err, os.ErrNotExist) {
+		slog.Error("failed to remove orphaned upload", "filename", filename, "error", err)
 	}
 
 	return nil

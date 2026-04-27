@@ -3,6 +3,8 @@ package handler
 import (
 	"errors"
 	"log/slog"
+	"mime"
+	"mime/multipart"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -22,18 +24,29 @@ func NewUploadHandler(svc *service.UploadService) *UploadHandler {
 func (h *UploadHandler) Upload(w http.ResponseWriter, r *http.Request) {
 	r.Body = http.MaxBytesReader(w, r.Body, service.MaxUploadSize)
 
-	if err := r.ParseMultipartForm(service.MaxUploadSize); err != nil {
-		writeError(w, http.StatusBadRequest, "file too large or invalid multipart form")
+	_, params, err := mime.ParseMediaType(r.Header.Get("Content-Type"))
+	if err != nil || params["boundary"] == "" {
+		writeError(w, http.StatusBadRequest, "invalid multipart form")
 		return
 	}
 
-	_, header, err := r.FormFile("file")
+	mr := multipart.NewReader(r.Body, params["boundary"])
+	form, err := mr.ReadForm(service.MaxUploadSize)
 	if err != nil {
+		writeError(w, http.StatusBadRequest, "file too large or invalid multipart form")
+		return
+	}
+	defer func() {
+		_ = form.RemoveAll()
+	}()
+
+	files := form.File["file"]
+	if len(files) == 0 {
 		writeError(w, http.StatusBadRequest, "missing 'file' field in form")
 		return
 	}
 
-	media, err := h.svc.Upload(r.Context(), header)
+	media, err := h.svc.Upload(r.Context(), files[0])
 	if err != nil {
 		slog.Error("failed to upload file", "error", err)
 		writeError(w, http.StatusInternalServerError, "failed to upload file")
@@ -50,14 +63,14 @@ func (h *UploadHandler) List(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusInternalServerError, "failed to list media")
 		return
 	}
-
 	writeJSON(w, http.StatusOK, media)
 }
 
 func (h *UploadHandler) Delete(w http.ResponseWriter, r *http.Request) {
-	id, err := uuid.Parse(chi.URLParam(r, "id"))
+	idStr := chi.URLParam(r, "id")
+	id, err := uuid.Parse(idStr)
 	if err != nil {
-		writeError(w, http.StatusBadRequest, "invalid media id")
+		writeError(w, http.StatusBadRequest, "invalid id")
 		return
 	}
 
@@ -66,7 +79,7 @@ func (h *UploadHandler) Delete(w http.ResponseWriter, r *http.Request) {
 			writeError(w, http.StatusNotFound, "media not found")
 			return
 		}
-		slog.Error("failed to delete media", "id", id, "error", err)
+		slog.Error("failed to delete media", "error", err)
 		writeError(w, http.StatusInternalServerError, "failed to delete media")
 		return
 	}
