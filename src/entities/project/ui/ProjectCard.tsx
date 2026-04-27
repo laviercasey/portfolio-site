@@ -14,7 +14,6 @@ import {
 } from 'framer-motion';
 import { Button } from '@/shared/ui';
 import StatusBadge from './StatusBadge';
-import { formatMonthYear } from '@/shared/lib';
 import type { Project } from '../model/types';
 
 interface ProjectCardProps {
@@ -72,7 +71,6 @@ export default function ProjectCard({ project, index = 0 }: ProjectCardProps) {
   const title = locale === 'ru' ? project.title.ru : project.title.en;
   const description = locale === 'ru' ? project.shortDescription.ru : project.shortDescription.en;
   const liveUrl = project.siteUrl || project.demoUrl;
-  const shippedAt = project.timelineShipped ? formatMonthYear(project.timelineShipped, locale) : null;
 
   return (
     <motion.div
@@ -157,13 +155,6 @@ export default function ProjectCard({ project, index = 0 }: ProjectCardProps) {
             </span>
           )}
         </div>
-
-        {shippedAt && (
-          <p className="text-[11px] font-mono text-muted-foreground/70 mb-3">
-            {locale === 'ru' ? 'Сдан: ' : 'Shipped: '}
-            {shippedAt}
-          </p>
-        )}
 
         <div className="flex gap-2">
           <Button asChild size="sm" className="flex-1 gap-1.5">

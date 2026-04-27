@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
     const title = isRu ? project.title.ru : project.title.en;
     const description = isRu ? project.shortDescription.ru : project.shortDescription.en;
-    const published = project.timelineStarted ?? project.createdAt;
-    const modified = project.timelineShipped ?? project.createdAt;
+    const published = project.createdAt;
+    const modified = project.createdAt;
 
     return {
       title,
@@ -90,8 +90,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const title = isRu ? project.title.ru : project.title.en;
   const description = isRu ? project.shortDescription.ru : project.shortDescription.en;
   const articleBody = isRu ? project.description.ru : project.description.en;
-  const published = project.timelineStarted ?? project.createdAt;
-  const modified = project.timelineShipped ?? project.createdAt;
+  const published = project.createdAt;
+  const modified = project.createdAt;
   const pageUrl = `${site.url}/${locale}/projects/${slug}`;
   const ogUrl = `${pageUrl}/opengraph-image`;
   const image = project.thumbnailUrl

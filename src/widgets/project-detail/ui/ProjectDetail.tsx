@@ -12,14 +12,12 @@ import {
   ArrowLeft,
   Star,
   Target,
-  Calendar,
   Images,
   Sparkles,
   Layers,
   Play,
 } from 'lucide-react';
 import type { Project } from '@/entities/project';
-import { formatMonthYear } from '@/shared/lib';
 import ProjectCredentials from './ProjectCredentials';
 import ProjectHighlights from './ProjectHighlights';
 import ProjectTechChoices from './ProjectTechChoices';
@@ -62,13 +60,6 @@ export default function ProjectDetail({ project }: Props) {
   const hasCreds = (project.demoCredentials?.length ?? 0) > 0;
   const hasGallery = (project.images?.length ?? 0) > 0;
   const liveUrl = project.siteUrl || project.demoUrl;
-
-  const timelineStarted = project.timelineStarted ? formatMonthYear(project.timelineStarted, locale) : null;
-  const timelineShipped = project.timelineShipped
-    ? formatMonthYear(project.timelineShipped, locale)
-    : project.status === 'in_development'
-      ? t('timelineInDev')
-      : null;
 
   const fadeUp = shouldReduce
     ? {}
@@ -269,29 +260,6 @@ export default function ProjectDetail({ project }: Props) {
         </main>
 
         <aside className="lg:sticky lg:top-24 lg:self-start space-y-4">
-          {(timelineStarted || timelineShipped) && (
-            <div className="glass-card rounded-xl p-5">
-              <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground mb-3 flex items-center gap-2">
-                <Calendar className="h-3.5 w-3.5 text-primary" />
-                Timeline
-              </h3>
-              <div className="font-mono text-sm">
-                {timelineStarted && (
-                  <div className="flex justify-between items-baseline">
-                    <span className="text-muted-foreground text-xs">{t('timelineStarted')}</span>
-                    <span className="text-foreground">{timelineStarted}</span>
-                  </div>
-                )}
-                {timelineShipped && (
-                  <div className="flex justify-between items-baseline mt-1.5">
-                    <span className="text-muted-foreground text-xs">{t('timelineShipped')}</span>
-                    <span className="text-foreground">{timelineShipped}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
           <div className="glass-card rounded-xl p-5">
             <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground mb-3 flex items-center gap-2">
               <Layers className="h-3.5 w-3.5 text-primary" />
