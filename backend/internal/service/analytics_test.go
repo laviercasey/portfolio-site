@@ -47,12 +47,19 @@ func newTestService(t *testing.T, ts *httptest.Server, ttl time.Duration) *Analy
 
 func umamiStatsBody(pv, prev, visitors, visits, bounces, totaltime int64) string {
 	return fmt.Sprintf(`{
-  "pageviews": {"value": %d, "prev": %d},
-  "visitors":  {"value": %d, "prev": 0},
-  "visits":    {"value": %d, "prev": 0},
-  "bounces":   {"value": %d, "prev": 0},
-  "totaltime": {"value": %d, "prev": 0}
-}`, pv, prev, visitors, visits, bounces, totaltime)
+  "pageviews": %d,
+  "visitors":  %d,
+  "visits":    %d,
+  "bounces":   %d,
+  "totaltime": %d,
+  "comparison": {
+    "pageviews": %d,
+    "visitors":  0,
+    "visits":    0,
+    "bounces":   0,
+    "totaltime": 0
+  }
+}`, pv, visitors, visits, bounces, totaltime, prev)
 }
 
 func TestNewAnalyticsService_DisabledWhenEnvsMissing(t *testing.T) {
@@ -454,8 +461,8 @@ func TestTopPages_Mapping(t *testing.T) {
 	t.Parallel()
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if got := r.URL.Query().Get("type"); got != "url" {
-			t.Errorf("type query: got %q, want url", got)
+		if got := r.URL.Query().Get("type"); got != "path" {
+			t.Errorf("type query: got %q, want path", got)
 		}
 		if got := r.URL.Query().Get("limit"); got != "5" {
 			t.Errorf("limit query: got %q, want 5", got)
@@ -970,7 +977,7 @@ func TestGet_BodySizeCapped(t *testing.T) {
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		_, _ = io.WriteString(w, `{"pageviews":{"value":1,"prev":0},"visitors":{"value":1,"prev":0},"visits":{"value":1,"prev":0},"bounces":{"value":0,"prev":0},"totaltime":{"value":0,"prev":0},"filler":"`)
+		_, _ = io.WriteString(w, `{"pageviews":1,"visitors":1,"visits":1,"bounces":0,"totaltime":0,"comparison":{"pageviews":0,"visitors":0,"visits":0,"bounces":0,"totaltime":0},"filler":"`)
 		chunk := strings.Repeat("A", 4096)
 		const target = 2 * (1 << 20)
 		written := 0

@@ -65,11 +65,18 @@ func decodeEnvelope(t *testing.T, rec *httptest.ResponseRecorder) testEnvelope {
 func newStatsUpstream() *httptest.Server {
 	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		_, _ = io.WriteString(w, `{
-          "pageviews": {"value": 500, "prev": 400},
-          "visitors":  {"value": 100, "prev": 0},
-          "visits":    {"value": 100, "prev": 0},
-          "bounces":   {"value": 20,  "prev": 0},
-          "totaltime": {"value": 6000,"prev": 0}
+          "pageviews": 500,
+          "visitors":  100,
+          "visits":    100,
+          "bounces":   20,
+          "totaltime": 6000,
+          "comparison": {
+            "pageviews": 400,
+            "visitors":  0,
+            "visits":    0,
+            "bounces":   0,
+            "totaltime": 0
+          }
         }`)
 	}))
 }
