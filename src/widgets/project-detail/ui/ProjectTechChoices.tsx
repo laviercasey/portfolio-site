@@ -29,18 +29,18 @@ export default function ProjectTechChoices({ choices }: Props) {
           return (
             <motion.li
               key={`${i}-${c.tech}`}
-              className="flex gap-3 items-start"
+              className="flex flex-col gap-1.5 sm:flex-row sm:items-start sm:gap-3"
               initial={shouldReduce ? {} : { opacity: 0, x: -8 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.35, delay: i * 0.05 }}
             >
-              <span className="font-mono text-sm px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 shrink-0 self-start">
+              <span className="font-mono text-sm px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 self-start break-all sm:shrink-0 sm:break-normal">
                 {c.tech}
               </span>
               {reason && (
-                <span className="text-sm text-muted-foreground leading-relaxed">
-                  — {reason}
+                <span className="text-sm text-muted-foreground leading-relaxed break-words min-w-0">
+                  <span className="hidden sm:inline">— </span>{reason}
                 </span>
               )}
             </motion.li>
