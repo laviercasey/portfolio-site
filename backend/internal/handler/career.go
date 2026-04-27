@@ -15,10 +15,16 @@ import (
 
 type CareerHandler struct {
 	svc *service.CareerService
+	rev service.Revalidator
 }
 
 func NewCareerHandler(svc *service.CareerService) *CareerHandler {
 	return &CareerHandler{svc: svc}
+}
+
+func (h *CareerHandler) WithRevalidator(r service.Revalidator) *CareerHandler {
+	h.rev = r
+	return h
 }
 
 func (h *CareerHandler) GetAll(w http.ResponseWriter, r *http.Request) {
@@ -62,6 +68,7 @@ func (h *CareerHandler) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	revalidateAsync(h.rev, []string{"/"})
 	writeJSON(w, http.StatusCreated, result)
 }
 
@@ -105,6 +112,7 @@ func (h *CareerHandler) Update(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	revalidateAsync(h.rev, []string{"/"})
 	writeJSON(w, http.StatusOK, result)
 }
 
@@ -135,6 +143,7 @@ func (h *CareerHandler) Delete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	revalidateAsync(h.rev, []string{"/"})
 	w.WriteHeader(http.StatusNoContent)
 }
 

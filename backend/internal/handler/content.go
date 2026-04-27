@@ -13,10 +13,16 @@ import (
 
 type ContentHandler struct {
 	svc *service.ContentService
+	rev service.Revalidator
 }
 
 func NewContentHandler(svc *service.ContentService) *ContentHandler {
 	return &ContentHandler{svc: svc}
+}
+
+func (h *ContentHandler) WithRevalidator(r service.Revalidator) *ContentHandler {
+	h.rev = r
+	return h
 }
 
 func isValidContentSection(s string) bool {
@@ -68,5 +74,6 @@ func (h *ContentHandler) Update(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	revalidateAsync(h.rev, []string{"/"})
 	writeJSON(w, http.StatusOK, content)
 }

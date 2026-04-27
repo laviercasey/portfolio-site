@@ -165,7 +165,11 @@ jobs:
             done
 
             if [ "$HEALTHY" -eq 1 ]; then
-              echo "deploy healthy, marking $NEW_SHA as last-good"
+              echo "deploy healthy, warming ISR cache..."
+              for path in /ru /en /ru/career /en/career /ru/contact /en/contact /ru/projects /en/projects; do
+                docker compose exec -T frontend wget -qO /dev/null "http://127.0.0.1:3000$path" || true
+              done
+              echo "marking $NEW_SHA as last-good"
               echo "$NEW_SHA" > .last-good-sha
               docker image prune -f
               exit 0

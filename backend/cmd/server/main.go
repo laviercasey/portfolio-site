@@ -81,9 +81,9 @@ func run(log *slog.Logger) error {
 	handlers := router.Handlers{
 		Health:    handler.NewHealthHandler(db),
 		Auth:      handler.NewAuthHandler(authSvc),
-		Project:   handler.NewProjectHandler(projectSvc),
-		Content:   handler.NewContentHandler(contentSvc),
-		Career:    handler.NewCareerHandler(careerSvc),
+		Project:   handler.NewProjectHandler(projectSvc).WithRevalidator(revalidator),
+		Content:   handler.NewContentHandler(contentSvc).WithRevalidator(revalidator),
+		Career:    handler.NewCareerHandler(careerSvc).WithRevalidator(revalidator),
 		Inquiry:   handler.NewInquiryHandler(inquirySvc),
 		Upload:    handler.NewUploadHandler(uploadSvc),
 		Analytics: handler.NewAnalyticsHandler(analyticsSvc, log),

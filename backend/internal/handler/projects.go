@@ -17,6 +17,7 @@ import (
 type ProjectHandler struct {
 	svc      *service.ProjectService
 	validate *validator.Validate
+	rev      service.Revalidator
 }
 
 func NewProjectHandler(svc *service.ProjectService) *ProjectHandler {
@@ -24,6 +25,11 @@ func NewProjectHandler(svc *service.ProjectService) *ProjectHandler {
 		svc:      svc,
 		validate: validator.New(),
 	}
+}
+
+func (h *ProjectHandler) WithRevalidator(r service.Revalidator) *ProjectHandler {
+	h.rev = r
+	return h
 }
 
 func (h *ProjectHandler) List(w http.ResponseWriter, r *http.Request) {
@@ -80,6 +86,7 @@ func (h *ProjectHandler) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	revalidateAsync(h.rev, []string{"/"})
 	writeJSON(w, http.StatusCreated, project)
 }
 
@@ -113,6 +120,7 @@ func (h *ProjectHandler) Update(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	revalidateAsync(h.rev, []string{"/"})
 	writeJSON(w, http.StatusOK, project)
 }
 
@@ -133,5 +141,6 @@ func (h *ProjectHandler) Delete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	revalidateAsync(h.rev, []string{"/"})
 	w.WriteHeader(http.StatusNoContent)
 }
