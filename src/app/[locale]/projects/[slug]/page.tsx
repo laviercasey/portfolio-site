@@ -62,28 +62,15 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   }
 }
 
-export async function generateStaticParams() {
-  try {
-    const projects = await projectsService.list();
-    const locales = ['ru', 'en'];
-    return locales.flatMap((locale) =>
-      projects.map((p) => ({ locale, slug: p.slug }))
-    );
-  } catch {
-    return [];
-  }
+export function generateStaticParams() {
+  return [];
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  let project;
-  try {
-    project = await projectsService.getBySlug(slug);
-  } catch {
-    notFound();
-  }
+  const project = await projectsService.getBySlug(slug);
   if (!project) notFound();
 
   const isRu = locale === 'ru';

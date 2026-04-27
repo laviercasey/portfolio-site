@@ -11,6 +11,10 @@ const site = siteJson as SiteConfig;
 
 export const revalidate = 600;
 
+export function generateStaticParams() {
+  return [];
+}
+
 export async function generateMetadata({
   params,
 }: {

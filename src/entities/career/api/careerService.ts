@@ -1,20 +1,10 @@
 import type { CareerContent } from '../model/types';
-import { serverApi, ApiError } from '@/shared/api';
-
-const EMPTY_CAREER: CareerContent = {
-  education: [],
-  workHistory: [],
-  certificates: [],
-  publications: [],
-};
-
-function isBuildTimeFetchFailure(error: unknown): boolean {
-  if (error instanceof ApiError) return error.status >= 500;
-  return true;
-}
+import { serverApi } from '@/shared/api';
 
 function normalizeCareer(raw: Partial<CareerContent> | null | undefined): CareerContent {
-  if (!raw) return { ...EMPTY_CAREER };
+  if (!raw) {
+    return { education: [], workHistory: [], certificates: [], publications: [] };
+  }
   return {
     education: Array.isArray(raw.education) ? raw.education : [],
     workHistory: Array.isArray(raw.workHistory) ? raw.workHistory : [],
@@ -25,13 +15,8 @@ function normalizeCareer(raw: Partial<CareerContent> | null | undefined): Career
 
 export const careerService = {
   async getAll(): Promise<CareerContent> {
-    try {
-      const data = await serverApi.get<Partial<CareerContent>>('/api/career');
-      return normalizeCareer(data);
-    } catch (error: unknown) {
-      if (isBuildTimeFetchFailure(error)) return { ...EMPTY_CAREER };
-      throw error;
-    }
+    const data = await serverApi.get<Partial<CareerContent>>('/api/career');
+    return normalizeCareer(data);
   },
 
   create(token: string, type: string, data: unknown) {

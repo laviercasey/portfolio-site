@@ -54,21 +54,11 @@ function normalizeProject(raw: RawProject): Project {
   };
 }
 
-function isBuildTimeFetchFailure(error: unknown): boolean {
-  if (error instanceof ApiError) return error.status >= 500;
-  return true;
-}
-
 export const projectsService = {
   async list(category?: string): Promise<Project[]> {
     const q = category ? `?category=${category}` : '';
-    try {
-      const data = await serverApi.get<RawProject[]>(`/api/projects${q}`);
-      return Array.isArray(data) ? data.map(normalizeProject) : [];
-    } catch (error: unknown) {
-      if (isBuildTimeFetchFailure(error)) return [];
-      throw error;
-    }
+    const data = await serverApi.get<RawProject[]>(`/api/projects${q}`);
+    return Array.isArray(data) ? data.map(normalizeProject) : [];
   },
 
   async getBySlug(slug: string): Promise<Project | null> {
@@ -77,7 +67,6 @@ export const projectsService = {
       return normalizeProject(raw);
     } catch (error: unknown) {
       if (error instanceof ApiError && error.status === 404) return null;
-      if (isBuildTimeFetchFailure(error)) return null;
       throw error;
     }
   },

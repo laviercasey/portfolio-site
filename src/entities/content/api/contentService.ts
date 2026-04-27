@@ -1,5 +1,5 @@
 import type { HomepageContent, HomepageVisibility, ContactPageConfig, HowIWorkConfig, ContactCTAConfig, Achievement, SocialLink } from '../model/types';
-import { serverApi, ApiError } from '@/shared/api';
+import { serverApi } from '@/shared/api';
 
 export interface ContentSection {
   section: string;
@@ -7,7 +7,7 @@ export interface ContentSection {
   updatedAt: string;
 }
 
-const DEFAULT_VISIBILITY: HomepageVisibility = {
+const BASE_VISIBILITY: HomepageVisibility = {
   showAboutGif: true,
   showAboutBio: true,
   showStatProjects: true,
@@ -29,36 +29,6 @@ function findSection<T>(sections: ContentSection[], name: string): T | null {
   return found ? (found.data as T) : null;
 }
 
-const DEFAULT_HOMEPAGE: HomepageContent = {
-  hero: {
-    name: { en: 'Portfolio', ru: 'Портфолио' },
-    titleAnimated: { en: ['Developer'], ru: ['Разработчик'] },
-    subtitleEn: 'Welcome to my portfolio',
-    subtitleRu: 'Добро пожаловать в моё портфолио',
-    availableForWork: true,
-  },
-  about: {
-    bioEn: '',
-    bioRu: '',
-    stats: { projects: 0, yearsExperience: 0, certificates: 0, githubStars: 0, habrArticles: 0 },
-  },
-  marqueeItems: [],
-  howIWork: { steps: [], philosophyTitleRu: '', philosophyTitleEn: '', philosophyTextRu: '', philosophyTextEn: '', payment1Ru: '', payment1En: '', payment1DescRu: '', payment1DescEn: '', payment2Ru: '', payment2En: '', payment2DescRu: '', payment2DescEn: '' },
-  contactCTA: { headingRu: '', headingEn: '', subtitleRu: '', subtitleEn: '', bgWordRu: '', bgWordEn: '' },
-  achievements: [],
-  socialLinks: [],
-  visibility: DEFAULT_VISIBILITY,
-};
-
-const DEFAULT_CONTACT: ContactPageConfig = {
-  heading: { en: 'Contact', ru: 'Контакты' },
-  subtitle: { en: 'Get in touch', ru: 'Свяжитесь со мной' },
-  howIWork: { en: '', ru: '' },
-  formFields: [],
-  submitTextRu: 'Отправить',
-  submitTextEn: 'Send',
-};
-
 function extractHomepage(sections: ContentSection[]): HomepageContent {
   const hero = findSection<HomepageContent['hero']>(sections, 'hero');
   const about = findSection<HomepageContent['about']>(sections, 'about');
@@ -70,44 +40,44 @@ function extractHomepage(sections: ContentSection[]): HomepageContent {
   const socialLinks = findSection<SocialLink[]>(sections, 'socialLinks');
 
   return {
-    hero: {
-      ...DEFAULT_HOMEPAGE.hero,
-      ...(hero ?? {}),
-      titleAnimated: {
-        ...DEFAULT_HOMEPAGE.hero.titleAnimated,
-        ...((hero as Partial<HomepageContent['hero']> | null)?.titleAnimated ?? {}),
-      },
+    hero: hero ?? {
+      name: { en: '', ru: '' },
+      titleAnimated: { en: [], ru: [] },
+      subtitleEn: '',
+      subtitleRu: '',
+      availableForWork: false,
     },
-    about: about ?? DEFAULT_HOMEPAGE.about,
-    marqueeItems: marqueeItems ?? DEFAULT_HOMEPAGE.marqueeItems,
-    howIWork: howIWork ?? DEFAULT_HOMEPAGE.howIWork,
-    contactCTA: contactCTA ?? DEFAULT_HOMEPAGE.contactCTA,
-    achievements: achievements ?? DEFAULT_HOMEPAGE.achievements,
-    socialLinks: socialLinks ?? DEFAULT_HOMEPAGE.socialLinks,
-    visibility: { ...DEFAULT_VISIBILITY, ...visibility },
+    about: about ?? {
+      bioEn: '',
+      bioRu: '',
+      stats: { projects: 0, yearsExperience: 0, certificates: 0, githubStars: 0, habrArticles: 0 },
+    },
+    marqueeItems: marqueeItems ?? [],
+    howIWork: howIWork ?? { steps: [], philosophyTitleRu: '', philosophyTitleEn: '', philosophyTextRu: '', philosophyTextEn: '', payment1Ru: '', payment1En: '', payment1DescRu: '', payment1DescEn: '', payment2Ru: '', payment2En: '', payment2DescRu: '', payment2DescEn: '' },
+    contactCTA: contactCTA ?? { headingRu: '', headingEn: '', subtitleRu: '', subtitleEn: '', bgWordRu: '', bgWordEn: '' },
+    achievements: achievements ?? [],
+    socialLinks: socialLinks ?? [],
+    visibility: { ...BASE_VISIBILITY, ...visibility },
   };
 }
 
 function extractContact(sections: ContentSection[]): ContactPageConfig {
   const data = findSection<ContactPageConfig>(sections, 'contact');
-  if (!data) return { ...DEFAULT_CONTACT };
-  return data;
-}
-
-function isBuildTimeFetchFailure(error: unknown): boolean {
-  if (error instanceof ApiError) return error.status >= 500;
-  return true;
+  if (data) return data;
+  return {
+    heading: { en: '', ru: '' },
+    subtitle: { en: '', ru: '' },
+    howIWork: { en: '', ru: '' },
+    formFields: [],
+    submitTextRu: '',
+    submitTextEn: '',
+  };
 }
 
 export const contentService = {
   async getAll(): Promise<ContentSection[]> {
-    try {
-      const data = await serverApi.get<ContentSection[]>('/api/content');
-      return Array.isArray(data) ? data : [];
-    } catch (error: unknown) {
-      if (isBuildTimeFetchFailure(error)) return [];
-      throw error;
-    }
+    const data = await serverApi.get<ContentSection[]>('/api/content');
+    return Array.isArray(data) ? data : [];
   },
 
   async getHomepage(): Promise<HomepageContent> {

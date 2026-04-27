@@ -171,6 +171,14 @@ jobs:
 
             if [ "$HEALTHY" -eq 1 ]; then
               echo "deploy healthy, warming ISR cache..."
+              REVALIDATE_SECRET=$(grep '^REVALIDATE_SECRET=' .env | cut -d= -f2-)
+              if [ -n "$REVALIDATE_SECRET" ]; then
+                docker compose exec -T frontend wget -qO- \
+                  --header="Authorization: Bearer $REVALIDATE_SECRET" \
+                  --header="Content-Type: application/json" \
+                  --post-data='{"paths":["/ru","/en","/ru/career","/en/career","/ru/contact","/en/contact","/ru/projects","/en/projects"]}' \
+                  http://127.0.0.1:3000/api/revalidate >/dev/null || true
+              fi
               for path in /ru /en /ru/career /en/career /ru/contact /en/contact /ru/projects /en/projects; do
                 docker compose exec -T frontend wget -qO /dev/null "http://127.0.0.1:3000$path" || true
               done

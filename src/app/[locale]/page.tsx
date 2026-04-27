@@ -13,6 +13,10 @@ import { Marquee } from '@/shared/ui';
 
 export const revalidate = 600;
 
+export function generateStaticParams() {
+  return [];
+}
+
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
