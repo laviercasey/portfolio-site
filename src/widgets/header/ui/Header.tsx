@@ -8,7 +8,6 @@ import type { SiteConfig } from '@/shared/types';
 const site = siteJson as SiteConfig;
 import { Link } from '@/shared/config';
 import { Menu, X, Code2 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeToggle } from '@/features/theme-toggle';
 import { LocaleSwitcher } from '@/features/locale-switcher';
 import { cn } from '@/shared/lib';
@@ -86,31 +85,29 @@ export default function Header() {
           </div>
         </div>
 
-        <AnimatePresence>
-          {mobileOpen && (
-            <motion.div
-              key="mobile-menu"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="overflow-hidden border-t border-white/10 md:hidden"
-            >
-              <nav className="flex flex-col gap-1 p-3">
-                {navLinks.map(({ key, href }) => (
-                  <Link
-                    key={key}
-                    href={href}
-                    className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground rounded-lg hover:bg-white/8 transition-all duration-200"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {t(key)}
-                  </Link>
-                ))}
-              </nav>
-            </motion.div>
+        <div
+          className={cn(
+            'md:hidden overflow-hidden transition-[max-height,opacity,border-color] duration-200 ease-out',
+            mobileOpen
+              ? 'max-h-72 opacity-100 border-t border-white/10'
+              : 'max-h-0 opacity-0 border-t border-transparent',
           )}
-        </AnimatePresence>
+          aria-hidden={!mobileOpen}
+        >
+          <nav className="flex flex-col gap-1 p-3">
+            {navLinks.map(({ key, href }) => (
+              <Link
+                key={key}
+                href={href}
+                tabIndex={mobileOpen ? 0 : -1}
+                className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground rounded-lg hover:bg-white/8 transition-all duration-200"
+                onClick={() => setMobileOpen(false)}
+              >
+                {t(key)}
+              </Link>
+            ))}
+          </nav>
+        </div>
       </div>
     </header>
   );

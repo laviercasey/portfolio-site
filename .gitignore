@@ -5,7 +5,6 @@ backend/server
 backend/coverage.out
 backend/coverage.html
 
-# Seed data (real portfolio content; uploaded to VPS separately, not via git)
 backend/migrations/seeds/*.sql
 !backend/migrations/seeds/.gitkeep
 
@@ -38,11 +37,6 @@ next-env.d.ts
 .DS_Store
 Thumbs.db
 
-# Local agent/orchestration state and exported documents
-.orchestra/
-*.pdf
-*.docx
-
 src/data/.overrides/
 
 backups/
@@ -53,7 +47,6 @@ backups/
 .last-good-sha
 .last-deploying-sha
 
-# Playwright
 /playwright-report/
 /test-results/
 /playwright/.cache/

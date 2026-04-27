@@ -213,3 +213,7 @@ body.custom-cursor-active * {
   }
   body::after { animation: none !important; }
 }
+
+@media (max-width: 768px) {
+  body::after { display: none; }
+}

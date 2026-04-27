@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 720" width="800" height="720" role="img" aria-label="Casey Laviere — full-stack developer signature">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="78%">
+      <stop offset="0%" stop-color="#3a2418"/>
+      <stop offset="55%" stop-color="#1a120c"/>
+      <stop offset="100%" stop-color="#0a0706"/>
+    </radialGradient>
+    <linearGradient id="warm" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d4a843"/>
+      <stop offset="55%" stop-color="#e07040"/>
+      <stop offset="100%" stop-color="#c45a30"/>
+    </linearGradient>
+    <linearGradient id="warmFade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d4a843" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#e07040" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#c45a30" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e07040" stop-opacity="0.55"/>
+      <stop offset="60%" stop-color="#c45a30" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#c45a30" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="spark" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fbf6ec" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#d4a843" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#e07040" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#d4a843" stroke-width="0.4" stroke-opacity="0.08"/>
+    </pattern>
+    <clipPath id="frame">
+      <rect width="800" height="720" rx="0"/>
+    </clipPath>
+
+    <path id="lineA" d="M 290 320 L 184 236"/>
+    <path id="lineB" d="M 510 320 L 618 216"/>
+    <path id="lineC" d="M 320 380 L 139 425"/>
+    <path id="lineD" d="M 480 380 L 653 425"/>
+  </defs>
+
+  <g clip-path="url(#frame)">
+    <rect width="800" height="720" fill="url(#bg)"/>
+    <rect width="800" height="720" fill="url(#grid)"/>
+
+    <circle cx="400" cy="320" r="240" fill="url(#glow)">
+      
+      
+    </circle>
+
+    <g transform="translate(0,40)">
+      <line x1="60" y1="0" x2="740" y2="0" stroke="url(#warmFade)" stroke-width="1"/>
+      <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" letter-spacing="3" fill="#d4a843" fill-opacity="0.55">
+        <text x="60" y="-10">~ /home/casey</text>
+        <text x="740" y="-10" text-anchor="end">
+          <tspan>● ONLINE</tspan>
+          
+        </text>
+      </g>
+    </g>
+
+    <g transform="translate(400 320)">
+      <circle r="170" fill="none" stroke="#d4a843" stroke-width="0.8" stroke-opacity="0.18" stroke-dasharray="2 6"/>
+      <circle r="210" fill="none" stroke="#e07040" stroke-width="0.8" stroke-opacity="0.14" stroke-dasharray="1 9"/>
+      <g>
+        <circle r="170" fill="none" stroke="url(#warm)" stroke-width="1.2" stroke-opacity="0.55" stroke-dasharray="60 1000" stroke-linecap="round"/>
+        
+      </g>
+      <g>
+        <circle r="210" fill="none" stroke="url(#warm)" stroke-width="1" stroke-opacity="0.45" stroke-dasharray="34 1500" stroke-linecap="round"/>
+        
+      </g>
+    </g>
+
+    <g transform="translate(400 320)">
+      <g>
+        
+        <g transform="translate(170 0)">
+          <circle r="6" fill="url(#warm)"/>
+          <circle r="10" fill="none" stroke="#e07040" stroke-opacity="0.45" stroke-width="1">
+            
+            
+          </circle>
+        </g>
+        <g transform="translate(-170 0)">
+          <circle r="4" fill="#d4a843" fill-opacity="0.85"/>
+        </g>
+        <g transform="translate(0 170)">
+          <circle r="5" fill="#e07040"/>
+          <circle r="9" fill="none" stroke="#d4a843" stroke-opacity="0.4" stroke-width="1">
+            
+            
+          </circle>
+        </g>
+        <g transform="translate(0 -170)">
+          <circle r="4" fill="#d4a843" fill-opacity="0.7"/>
+        </g>
+      </g>
+      <g>
+        
+        <g transform="translate(210 0)">
+          <circle r="3" fill="#c45a30" fill-opacity="0.85"/>
+        </g>
+        <g transform="translate(-210 0)">
+          <circle r="3" fill="#d4a843" fill-opacity="0.6"/>
+        </g>
+      </g>
+    </g>
+
+    <g stroke="url(#warmFade)" stroke-width="0.8" fill="none" opacity="0.55">
+      <use href="#lineA"/>
+      <use href="#lineB"/>
+      <use href="#lineC"/>
+      <use href="#lineD"/>
+    </g>
+
+    <g>
+      <circle r="2.6" fill="#d4a843">
+        
+        
+      </circle>
+      <circle r="2.4" fill="#e07040">
+        
+        
+      </circle>
+      <circle r="2.6" fill="#d4a843">
+        
+        
+      </circle>
+      <circle r="2.4" fill="#e07040">
+        
+        
+      </circle>
+    </g>
+
+    <g>
+      <circle cx="400" cy="320" r="0" fill="url(#spark)">
+        
+        
+      </circle>
+    </g>
+
+    <g transform="translate(400 320)">
+      <circle r="118" fill="#1a120c" stroke="url(#warm)" stroke-width="1.5" stroke-opacity="0.55"/>
+      <circle r="118" fill="none" stroke="url(#warm)" stroke-width="1.5" stroke-opacity="0.7">
+        
+        
+      </circle>
+      <text text-anchor="middle" dominant-baseline="central" y="6"
+            font-family="Georgia, 'Playfair Display', serif" font-style="italic" font-weight="900"
+            font-size="120" fill="url(#warm)" letter-spacing="-4">CL</text>
+    </g>
+
+    <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="13" letter-spacing="2">
+      <g transform="translate(110 220)">
+        <g>
+          <rect x="0" y="0" width="148" height="32" rx="16" fill="#1a120c" stroke="#d4a843" stroke-opacity="0.55"/>
+          <circle cx="16" cy="16" r="3" fill="#d4a843"/>
+          <text x="30" y="20" fill="#d4a843">PYTHON · ML</text>
+          
+          
+        </g>
+        <g>
+          <rect x="0" y="0" width="148" height="32" rx="16" fill="#1a120c" stroke="#e07040" stroke-opacity="0.55"/>
+          <circle cx="16" cy="16" r="3" fill="#e07040"/>
+          <text x="30" y="20" fill="#e07040">GO · API</text>
+          
+        </g>
+        <g>
+          <rect x="0" y="0" width="148" height="32" rx="16" fill="#1a120c" stroke="#d4a843" stroke-opacity="0.55"/>
+          <circle cx="16" cy="16" r="3" fill="#d4a843"/>
+          <text x="30" y="20" fill="#d4a843">LARAVEL</text>
+          
+        </g>
+        <g>
+          <rect x="0" y="0" width="148" height="32" rx="16" fill="#1a120c" stroke="#e07040" stroke-opacity="0.55"/>
+          <circle cx="16" cy="16" r="3" fill="#e07040"/>
+          <text x="30" y="20" fill="#e07040">POSTGRES</text>
+          
+        </g>
+      </g>
+
+      <g transform="translate(545 200)">
+        <g>
+          <rect x="0" y="0" width="146" height="32" rx="16" fill="#1a120c" stroke="#e07040" stroke-opacity="0.55"/>
+          <circle cx="16" cy="16" r="3" fill="#e07040"/>
+          <text x="30" y="20" fill="#e07040">TYPESCRIPT</text>
+          
+        </g>
+        <g>
+          <rect x="0" y="0" width="146" height="32" rx="16" fill="#1a120c" stroke="#d4a843" stroke-opacity="0.55"/>
+          <circle cx="16" cy="16" r="3" fill="#d4a843"/>
+          <text x="30" y="20" fill="#d4a843">NEXT.JS</text>
+          
+        </g>
+        <g>
+          <rect x="0" y="0" width="146" height="32" rx="16" fill="#1a120c" stroke="#e07040" stroke-opacity="0.55"/>
+          <circle cx="16" cy="16" r="3" fill="#e07040"/>
+          <text x="30" y="20" fill="#e07040">RUST · CLI</text>
+          
+        </g>
+        <g>
+          <rect x="0" y="0" width="146" height="32" rx="16" fill="#1a120c" stroke="#d4a843" stroke-opacity="0.55"/>
+          <circle cx="16" cy="16" r="3" fill="#d4a843"/>
+          <text x="30" y="20" fill="#d4a843">DOCKER · CI</text>
+          
+        </g>
+      </g>
+
+      <g transform="translate(70 410)">
+        <g>
+          <rect x="0" y="0" width="138" height="30" rx="15" fill="#1a120c" stroke="#d4a843" stroke-opacity="0.4"/>
+          <text x="14" y="20" fill="#d4a843" fill-opacity="0.85">REACT</text>
+          
+        </g>
+        <g>
+          <rect x="0" y="0" width="138" height="30" rx="15" fill="#1a120c" stroke="#e07040" stroke-opacity="0.4"/>
+          <text x="14" y="20" fill="#e07040" fill-opacity="0.85">NODE.JS</text>
+          
+        </g>
+        <g>
+          <rect x="0" y="0" width="138" height="30" rx="15" fill="#1a120c" stroke="#d4a843" stroke-opacity="0.4"/>
+          <text x="14" y="20" fill="#d4a843" fill-opacity="0.85">REDIS · MQ</text>
+          
+        </g>
+      </g>
+
+      <g transform="translate(580 410)">
+        <g>
+          <rect x="0" y="0" width="146" height="30" rx="15" fill="#1a120c" stroke="#e07040" stroke-opacity="0.4"/>
+          <text x="14" y="20" fill="#e07040" fill-opacity="0.85">PHP</text>
+          
+        </g>
+        <g>
+          <rect x="0" y="0" width="146" height="30" rx="15" fill="#1a120c" stroke="#d4a843" stroke-opacity="0.4"/>
+          <text x="14" y="20" fill="#d4a843" fill-opacity="0.85">KUBERNETES</text>
+          
+        </g>
+        <g>
+          <rect x="0" y="0" width="146" height="30" rx="15" fill="#1a120c" stroke="#e07040" stroke-opacity="0.4"/>
+          <text x="14" y="20" fill="#e07040" fill-opacity="0.85">LINUX · NGINX</text>
+          
+        </g>
+      </g>
+    </g>
+
+    <g transform="translate(400 540)">
+      <rect x="-220" y="0" width="440" height="86" rx="12" fill="#1a120c" stroke="#d4a843" stroke-opacity="0.35"/>
+      <g transform="translate(-200 18)">
+        <circle cx="0" cy="0" r="4" fill="#c45a30"/>
+        <circle cx="14" cy="0" r="4" fill="#d4a843"/>
+        <circle cx="28" cy="0" r="4" fill="#86efac" fill-opacity="0.65"/>
+      </g>
+      <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="14" fill="#fbf6ec">
+        <text x="-198" y="50" fill="#d4a843">$</text>
+        <text x="-180" y="50">
+          <tspan>build &amp; ship</tspan>
+          
+        </text>
+        <text x="-180" y="50" fill-opacity="0.95">
+          <tspan>go build ./...</tspan>
+          
+        </text>
+        <text x="-180" y="50" fill-opacity="0.95">
+          <tspan>git commit -m "ship"</tspan>
+          
+        </text>
+        <text x="-180" y="50" fill-opacity="0.95">
+          <tspan>deploy --prod</tspan>
+          
+        </text>
+        <rect x="-30" y="38" width="9" height="16" fill="#e07040">
+          
+        </rect>
+        <text x="-198" y="74" fill="#d4a843" fill-opacity="0.55" font-size="11" letter-spacing="2">
+          ✓ 0 ERRORS · 0 WARNINGS
+        </text>
+      </g>
+    </g>
+
+    <g transform="translate(0 660)" opacity="0.55">
+      <path d="M 0 0 L 120 0 L 140 -18 L 160 18 L 175 -8 L 200 0 L 320 0 L 345 -22 L 365 22 L 385 -6 L 410 0 L 540 0 L 565 -16 L 580 16 L 600 0 L 800 0"
+            fill="none" stroke="url(#warm)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        
+      </path>
+    </g>
+
+    <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" letter-spacing="3" fill="#d4a843" fill-opacity="0.45">
+      <text x="60" y="700">MOSCOW · SINCE 2021</text>
+      <text x="740" y="700" text-anchor="end">FULL-STACK · SYSTEMS</text>
+    </g>
+
+    <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" letter-spacing="4" text-anchor="middle">
+      <text x="400" y="500" fill="#d4a843" fill-opacity="0.7">CODE · SHIP · ITERATE</text>
+    </g>
+
+    <g stroke="url(#warm)" stroke-width="1.5" stroke-opacity="0.55" fill="none">
+      <path d="M 30 30 L 30 70 M 30 30 L 70 30"/>
+      <path d="M 770 30 L 770 70 M 770 30 L 730 30"/>
+      <path d="M 30 690 L 30 650 M 30 690 L 70 690"/>
+      <path d="M 770 690 L 770 650 M 770 690 L 730 690"/>
+    </g>
+  </g>
+</svg>

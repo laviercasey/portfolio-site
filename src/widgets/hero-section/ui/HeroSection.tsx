@@ -87,7 +87,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
       {!shouldReduceMotion && (
         <>
           <motion.div
-            className="pointer-events-none absolute rounded-full"
+            className="pointer-events-none absolute rounded-full hidden md:block"
             style={{
               x: orb1x, y: orb1y,
               width: 700, height: 700,
@@ -97,7 +97,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
             }}
           />
           <motion.div
-            className="pointer-events-none absolute rounded-full"
+            className="pointer-events-none absolute rounded-full hidden md:block"
             style={{
               x: orb2x, y: orb2y,
               width: 500, height: 500,
@@ -107,7 +107,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
             }}
           />
           <motion.div
-            className="pointer-events-none absolute rounded-full"
+            className="pointer-events-none absolute rounded-full hidden md:block"
             style={{
               x: orb3x, y: orb3y,
               width: 300, height: 300,

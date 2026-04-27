@@ -61,11 +61,24 @@ export default function AboutSection({ content, projects = [] }: AboutSectionPro
             >
               <div className="relative h-[360px] md:h-full min-h-[400px] rounded-2xl overflow-hidden group border border-white/10 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
                 {content.about.gifUrl ? (
-                  <img
-                    src={content.about.gifUrl}
-                    alt={locale === 'ru' ? 'Кейси Лавьер' : 'Casey Laviere'}
-                    className="w-full h-full object-cover"
-                  />
+                  (() => {
+                    const url = content.about.gifUrl;
+                    const isSvg = /\.svg$/i.test(url);
+                    const staticUrl = isSvg ? url.replace(/\.svg$/i, '-static.svg') : url;
+                    const alt = locale === 'ru' ? 'Кейси Лавьер' : 'Casey Laviere';
+                    return (
+                      <picture>
+                        <source media="(min-width: 768px)" srcSet={url} />
+                        <img
+                          src={staticUrl}
+                          alt={alt}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover"
+                        />
+                      </picture>
+                    );
+                  })()
                 ) : (
                   <div className="w-full h-full flex flex-col items-center justify-center gap-4">
                     <div className="relative">
