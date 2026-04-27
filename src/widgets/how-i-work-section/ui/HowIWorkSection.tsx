@@ -22,6 +22,8 @@ import type { LucideIcon } from 'lucide-react';
 const STEP_DURATION = 6000;
 const PAUSE_DURATION = 30000;
 
+const OPTIMIZED_STEP_GIF = /^\/images\/how-i-work\/step\d+\.gif$/i;
+
 function StepMedia({
   gifUrl, isActive, alt, icon: Icon, bg, color, size = 'desktop',
 }: {
@@ -29,31 +31,42 @@ function StepMedia({
   icon: LucideIcon; bg: string; color: string;
   size?: 'desktop' | 'mobile';
 }) {
-  const [firstFrame, setFirstFrame] = useState<string | null>(null);
+  const isOptimized = !!gifUrl && OPTIMIZED_STEP_GIF.test(gifUrl);
+  const base = isOptimized ? gifUrl!.replace(/\.gif$/i, '') : null;
 
-  useEffect(() => {
-    if (!gifUrl) return;
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        ctx.drawImage(img, 0, 0);
-        try { setFirstFrame(canvas.toDataURL('image/webp', 0.85)); } catch {}
-      }
-    };
-    img.src = gifUrl;
-  }, [gifUrl]);
-
-  if (isActive && gifUrl) {
-    return <img key={`active-${gifUrl}`} src={gifUrl} alt={alt} className="w-full h-full object-cover" />;
+  if (base) {
+    const poster = `${base}-poster.webp`;
+    return (
+      <>
+        <img
+          src={poster}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        {isActive && (
+          <video
+            key={base}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            poster={poster}
+            aria-label={alt}
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src={`${base}.webm`} type="video/webm" />
+            <source src={`${base}.mp4`} type="video/mp4" />
+          </video>
+        )}
+      </>
+    );
   }
 
-  if (!isActive && firstFrame) {
-    return <img src={firstFrame} alt={alt} className="w-full h-full object-cover" />;
+  if (gifUrl) {
+    return <img src={gifUrl} alt={alt} loading="lazy" decoding="async" className="w-full h-full object-cover" />;
   }
 
   const iconSize = size === 'desktop' ? 'h-8 w-8' : 'h-6 w-6';
