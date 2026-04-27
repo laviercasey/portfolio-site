@@ -9,7 +9,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /server ./cmd/server
 
 RUN CGO_ENABLED=0 GOOS=linux go install -ldflags="-s -w" github.com/pressly/goose/v3/cmd/goose@v3.22.1
 
-FROM alpine:3.19
+FROM alpine:3.23
 
 RUN apk add --no-cache ca-certificates tzdata wget
 
