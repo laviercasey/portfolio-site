@@ -107,7 +107,6 @@ func (s *CareerService) Delete(ctx context.Context, careerType string, id uuid.U
 	return nil
 }
 
-
 func (s *CareerService) listEducation(ctx context.Context) ([]model.Education, error) {
 	rows, err := s.db.Pool.Query(ctx,
 		`SELECT id, institution, degree, field, start_year, end_year, description, logo_url, related_project_slugs FROM education ORDER BY sort_order ASC, start_year DESC`)

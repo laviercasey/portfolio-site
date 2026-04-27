@@ -52,4 +52,3 @@ func Auth(auth *service.AuthService) func(http.Handler) http.Handler {
 		})
 	}
 }
-

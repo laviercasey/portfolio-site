@@ -316,4 +316,3 @@ func (s *ProjectService) Delete(ctx context.Context, id uuid.UUID) error {
 	}
 	return nil
 }
-

@@ -16,11 +16,11 @@ type Config struct {
 	CORSOrigins       []string `mapstructure:"-"`
 	corsRaw           string
 
-	AppEnv                string `mapstructure:"APP_ENV"`
-	UmamiAPIURL           string `mapstructure:"UMAMI_API_URL"`
-	UmamiAPIKey           string `mapstructure:"UMAMI_API_KEY"`
-	UmamiWebsiteID        string `mapstructure:"UMAMI_WEBSITE_ID"`
-	UmamiCacheTTLSeconds  int    `mapstructure:"UMAMI_CACHE_TTL_SECONDS"`
+	AppEnv               string `mapstructure:"APP_ENV"`
+	UmamiAPIURL          string `mapstructure:"UMAMI_API_URL"`
+	UmamiAPIKey          string `mapstructure:"UMAMI_API_KEY"`
+	UmamiWebsiteID       string `mapstructure:"UMAMI_WEBSITE_ID"`
+	UmamiCacheTTLSeconds int    `mapstructure:"UMAMI_CACHE_TTL_SECONDS"`
 }
 
 func Load() (*Config, error) {

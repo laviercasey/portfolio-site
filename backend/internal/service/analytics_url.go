@@ -8,11 +8,11 @@ import (
 )
 
 var blockedMetadataHosts = map[string]struct{}{
-	"169.254.169.254":        {},
+	"169.254.169.254":          {},
 	"metadata.google.internal": {},
-	"metadata.goog":          {},
-	"metadata":               {},
-	"169.254.170.2":          {},
+	"metadata.goog":            {},
+	"metadata":                 {},
+	"169.254.170.2":            {},
 }
 
 func validateUmamiURL(raw, env string) (*url.URL, error) {

@@ -57,57 +57,57 @@ type Project struct {
 }
 
 type CreateProjectInput struct {
-	Slug             string            `json:"slug" validate:"required,min=2,max=100"`
-	Title            I18n              `json:"title" validate:"required"`
-	ShortDescription I18n              `json:"shortDescription"`
-	Desc             I18n              `json:"description"`
-	Category         string            `json:"category" validate:"required"`
-	Status           string            `json:"status" validate:"required,oneof=completed in_development open_source"`
-	Tags             []string          `json:"tags"`
-	TechStack        []string          `json:"techStack"`
-	GoalDescription  I18n              `json:"goalDescription"`
-	GithubURL        string            `json:"githubUrl" validate:"omitempty,url"`
-	DemoURL          string            `json:"demoUrl" validate:"omitempty,url"`
-	SiteURL          string            `json:"siteUrl" validate:"omitempty,url"`
-	VideoURL         string            `json:"videoUrl"`
-	ThumbnailURL     string            `json:"thumbnailUrl"`
-	Images           []string          `json:"images"`
-	Featured         bool              `json:"featured"`
-	Order            int               `json:"order"`
-	Problem          I18n              `json:"problem"`
-	Approach         I18n              `json:"approach"`
-	Outcome          I18n              `json:"outcome"`
-	TechChoices      []TechChoice      `json:"techChoices"`
-	Highlights       []Highlight       `json:"highlights"`
-	TimelineStarted  *time.Time        `json:"timelineStarted"`
-	TimelineShipped  *time.Time        `json:"timelineShipped"`
-	DemoCredentials  []DemoCredential  `json:"demoCredentials" validate:"dive"`
+	Slug             string           `json:"slug" validate:"required,min=2,max=100"`
+	Title            I18n             `json:"title" validate:"required"`
+	ShortDescription I18n             `json:"shortDescription"`
+	Desc             I18n             `json:"description"`
+	Category         string           `json:"category" validate:"required"`
+	Status           string           `json:"status" validate:"required,oneof=completed in_development open_source"`
+	Tags             []string         `json:"tags"`
+	TechStack        []string         `json:"techStack"`
+	GoalDescription  I18n             `json:"goalDescription"`
+	GithubURL        string           `json:"githubUrl" validate:"omitempty,url"`
+	DemoURL          string           `json:"demoUrl" validate:"omitempty,url"`
+	SiteURL          string           `json:"siteUrl" validate:"omitempty,url"`
+	VideoURL         string           `json:"videoUrl"`
+	ThumbnailURL     string           `json:"thumbnailUrl"`
+	Images           []string         `json:"images"`
+	Featured         bool             `json:"featured"`
+	Order            int              `json:"order"`
+	Problem          I18n             `json:"problem"`
+	Approach         I18n             `json:"approach"`
+	Outcome          I18n             `json:"outcome"`
+	TechChoices      []TechChoice     `json:"techChoices"`
+	Highlights       []Highlight      `json:"highlights"`
+	TimelineStarted  *time.Time       `json:"timelineStarted"`
+	TimelineShipped  *time.Time       `json:"timelineShipped"`
+	DemoCredentials  []DemoCredential `json:"demoCredentials" validate:"dive"`
 }
 
 type UpdateProjectInput struct {
-	Slug             *string            `json:"slug" validate:"omitempty,min=2,max=100"`
-	Title            *I18n              `json:"title"`
-	ShortDescription *I18n              `json:"shortDescription"`
-	Desc             *I18n              `json:"description"`
-	Category         *string            `json:"category"`
-	Status           *string            `json:"status" validate:"omitempty,oneof=completed in_development open_source"`
-	Tags             *[]string          `json:"tags"`
-	TechStack        *[]string          `json:"techStack"`
-	GoalDescription  *I18n              `json:"goalDescription"`
-	GithubURL        *string            `json:"githubUrl" validate:"omitempty,url"`
-	DemoURL          *string            `json:"demoUrl" validate:"omitempty,url"`
-	SiteURL          *string            `json:"siteUrl" validate:"omitempty,url"`
-	VideoURL         *string            `json:"videoUrl"`
-	ThumbnailURL     *string            `json:"thumbnailUrl"`
-	Images           *[]string          `json:"images"`
-	Featured         *bool              `json:"featured"`
-	Order            *int               `json:"order"`
-	Problem          *I18n              `json:"problem"`
-	Approach         *I18n              `json:"approach"`
-	Outcome          *I18n              `json:"outcome"`
-	TechChoices      *[]TechChoice      `json:"techChoices"`
-	Highlights       *[]Highlight       `json:"highlights"`
-	TimelineStarted  *time.Time         `json:"timelineStarted"`
-	TimelineShipped  *time.Time         `json:"timelineShipped"`
-	DemoCredentials  *[]DemoCredential  `json:"demoCredentials"`
+	Slug             *string           `json:"slug" validate:"omitempty,min=2,max=100"`
+	Title            *I18n             `json:"title"`
+	ShortDescription *I18n             `json:"shortDescription"`
+	Desc             *I18n             `json:"description"`
+	Category         *string           `json:"category"`
+	Status           *string           `json:"status" validate:"omitempty,oneof=completed in_development open_source"`
+	Tags             *[]string         `json:"tags"`
+	TechStack        *[]string         `json:"techStack"`
+	GoalDescription  *I18n             `json:"goalDescription"`
+	GithubURL        *string           `json:"githubUrl" validate:"omitempty,url"`
+	DemoURL          *string           `json:"demoUrl" validate:"omitempty,url"`
+	SiteURL          *string           `json:"siteUrl" validate:"omitempty,url"`
+	VideoURL         *string           `json:"videoUrl"`
+	ThumbnailURL     *string           `json:"thumbnailUrl"`
+	Images           *[]string         `json:"images"`
+	Featured         *bool             `json:"featured"`
+	Order            *int              `json:"order"`
+	Problem          *I18n             `json:"problem"`
+	Approach         *I18n             `json:"approach"`
+	Outcome          *I18n             `json:"outcome"`
+	TechChoices      *[]TechChoice     `json:"techChoices"`
+	Highlights       *[]Highlight      `json:"highlights"`
+	TimelineStarted  *time.Time        `json:"timelineStarted"`
+	TimelineShipped  *time.Time        `json:"timelineShipped"`
+	DemoCredentials  *[]DemoCredential `json:"demoCredentials"`
 }
