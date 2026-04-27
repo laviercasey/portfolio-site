@@ -45,6 +45,8 @@ services:
       UMAMI_WEBSITE_ID: ${UMAMI_WEBSITE_ID:-}
       GITHUB_TOKEN: ${GITHUB_TOKEN:-}
       GITHUB_STARS_SYNC_INTERVAL_HOURS: ${GITHUB_STARS_SYNC_INTERVAL_HOURS:-6}
+      REVALIDATE_URL: http://frontend:3000/api/revalidate
+      REVALIDATE_SECRET: ${REVALIDATE_SECRET:-}
     volumes:
       - uploads:/data/uploads
     healthcheck:
@@ -102,6 +104,7 @@ services:
       YANDEX_VERIFICATION: ${YANDEX_VERIFICATION:-}
       INDEXNOW_KEY: ${INDEXNOW_KEY:-}
       INDEXNOW_API_SECRET: ${INDEXNOW_API_SECRET:-}
+      REVALIDATE_SECRET: ${REVALIDATE_SECRET:-}
       NODE_ENV: production
     expose:
       - "3000"

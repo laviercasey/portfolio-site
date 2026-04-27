@@ -24,6 +24,9 @@ type Config struct {
 
 	GithubToken                  string `mapstructure:"GITHUB_TOKEN"`
 	GithubStarsSyncIntervalHours int    `mapstructure:"GITHUB_STARS_SYNC_INTERVAL_HOURS"`
+
+	RevalidateURL    string `mapstructure:"REVALIDATE_URL"`
+	RevalidateSecret string `mapstructure:"REVALIDATE_SECRET"`
 }
 
 func Load() (*Config, error) {
@@ -54,6 +57,9 @@ func Load() (*Config, error) {
 
 		GithubToken:                  v.GetString("GITHUB_TOKEN"),
 		GithubStarsSyncIntervalHours: v.GetInt("GITHUB_STARS_SYNC_INTERVAL_HOURS"),
+
+		RevalidateURL:    v.GetString("REVALIDATE_URL"),
+		RevalidateSecret: v.GetString("REVALIDATE_SECRET"),
 	}
 
 	if err := cfg.validate(); err != nil {

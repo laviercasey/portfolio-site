@@ -40,6 +40,8 @@ services:
       UMAMI_WEBSITE_ID: ${UMAMI_WEBSITE_ID:-}
       GITHUB_TOKEN: ${GITHUB_TOKEN:-}
       GITHUB_STARS_SYNC_INTERVAL_HOURS: ${GITHUB_STARS_SYNC_INTERVAL_HOURS:-6}
+      REVALIDATE_URL: http://frontend:3000/api/revalidate
+      REVALIDATE_SECRET: ${REVALIDATE_SECRET:-}
     volumes:
       - uploads:/data/uploads
     ports:
@@ -76,6 +78,7 @@ services:
       NEXT_PUBLIC_UMAMI_SRC: ${NEXT_PUBLIC_UMAMI_SRC:-}
       NEXT_PUBLIC_UMAMI_WEBSITE_ID: ${NEXT_PUBLIC_UMAMI_WEBSITE_ID:-}
       NEXT_PUBLIC_UMAMI_ALLOWED_HOSTS: ${NEXT_PUBLIC_UMAMI_ALLOWED_HOSTS:-}
+      REVALIDATE_SECRET: ${REVALIDATE_SECRET:-}
     volumes:
       - ./src:/app/src
       - ./public:/app/public

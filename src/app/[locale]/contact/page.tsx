@@ -8,7 +8,7 @@ import { ContactPage } from '@/widgets/contact-page';
 
 const site = siteJson as SiteConfig;
 
-export const revalidate = 3600;
+export const revalidate = 600;
 
 export async function generateMetadata({
   params,

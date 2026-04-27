@@ -213,6 +213,112 @@ func TestGithubStarsService_FetchStars_DecodeError(t *testing.T) {
 	}
 }
 
+type stubRevalidator struct {
+	calls [][]string
+	err   error
+}
+
+func (s *stubRevalidator) Revalidate(_ context.Context, paths []string) error {
+	s.calls = append(s.calls, paths)
+	return s.err
+}
+
+func TestGithubStarsService_SyncAll_TriggersRevalidate(t *testing.T) {
+	t.Parallel()
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		_, _ = fmt.Fprint(w, `{"stargazers_count": 5}`)
+	}))
+	defer ts.Close()
+
+	db, pool := testutil.NewMockDB(t)
+	id := uuid.New()
+	pool.ExpectQuery(`SELECT id, slug, github_url FROM projects`).
+		WillReturnRows(pgxmock.NewRows([]string{"id", "slug", "github_url"}).
+			AddRow(id, "p", "https://github.com/x/y"))
+	pool.ExpectExec(`UPDATE projects SET stars`).
+		WithArgs(5, id).
+		WillReturnResult(pgxmock.NewResult("UPDATE", 1))
+
+	rev := &stubRevalidator{}
+	svc := (&GithubStarsService{
+		db:      db,
+		client:  &http.Client{Timeout: 2 * time.Second},
+		baseURL: ts.URL,
+		logger:  testutil.SilentLogger(),
+	}).WithRevalidator(rev)
+
+	if err := svc.SyncAll(context.Background()); err != nil {
+		t.Fatalf("SyncAll: %v", err)
+	}
+	if len(rev.calls) != 1 {
+		t.Fatalf("revalidator calls = %d, want 1", len(rev.calls))
+	}
+	if len(rev.calls[0]) != 1 || rev.calls[0][0] != "/" {
+		t.Errorf("paths = %v, want [\"/\"]", rev.calls[0])
+	}
+}
+
+func TestGithubStarsService_SyncAll_NoUpdatesNoRevalidate(t *testing.T) {
+	t.Parallel()
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.WriteHeader(http.StatusBadGateway)
+	}))
+	defer ts.Close()
+
+	db, pool := testutil.NewMockDB(t)
+	id := uuid.New()
+	pool.ExpectQuery(`SELECT id, slug, github_url FROM projects`).
+		WillReturnRows(pgxmock.NewRows([]string{"id", "slug", "github_url"}).
+			AddRow(id, "p", "https://github.com/x/y"))
+
+	rev := &stubRevalidator{}
+	svc := (&GithubStarsService{
+		db:      db,
+		client:  &http.Client{Timeout: 2 * time.Second},
+		baseURL: ts.URL,
+		logger:  testutil.SilentLogger(),
+	}).WithRevalidator(rev)
+
+	if err := svc.SyncAll(context.Background()); err != nil {
+		t.Fatalf("SyncAll: %v", err)
+	}
+	if len(rev.calls) != 0 {
+		t.Errorf("revalidator should not be called when no updates: calls=%d", len(rev.calls))
+	}
+}
+
+func TestGithubStarsService_SyncAll_RevalidateErrorNonFatal(t *testing.T) {
+	t.Parallel()
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		_, _ = fmt.Fprint(w, `{"stargazers_count": 1}`)
+	}))
+	defer ts.Close()
+
+	db, pool := testutil.NewMockDB(t)
+	id := uuid.New()
+	pool.ExpectQuery(`SELECT id, slug, github_url FROM projects`).
+		WillReturnRows(pgxmock.NewRows([]string{"id", "slug", "github_url"}).
+			AddRow(id, "p", "https://github.com/x/y"))
+	pool.ExpectExec(`UPDATE projects SET stars`).
+		WithArgs(1, id).
+		WillReturnResult(pgxmock.NewResult("UPDATE", 1))
+
+	rev := &stubRevalidator{err: errors.New("downstream fail")}
+	svc := (&GithubStarsService{
+		db:      db,
+		client:  &http.Client{Timeout: 2 * time.Second},
+		baseURL: ts.URL,
+		logger:  testutil.SilentLogger(),
+	}).WithRevalidator(rev)
+
+	if err := svc.SyncAll(context.Background()); err != nil {
+		t.Fatalf("SyncAll should not propagate revalidate error: %v", err)
+	}
+}
+
 func TestGithubStarsService_SyncAll_HappyPath(t *testing.T) {
 	t.Parallel()
 

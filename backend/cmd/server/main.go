@@ -52,12 +52,17 @@ func run(log *slog.Logger) error {
 	inquirySvc := service.NewInquiryService(db)
 	uploadSvc := service.NewUploadService(db, cfg.UploadDir)
 
+	revalidator := service.NewRevalidateService(cfg.RevalidateURL, cfg.RevalidateSecret, log)
+	if revalidator.Enabled() {
+		log.Info("revalidate client: enabled", slog.String("url", cfg.RevalidateURL))
+	}
+
 	ghStarsSvc := service.NewGithubStarsService(
 		db,
 		cfg.GithubToken,
 		time.Duration(cfg.GithubStarsSyncIntervalHours)*time.Hour,
 		log,
-	)
+	).WithRevalidator(revalidator)
 	ghStarsSvc.Start(ctx)
 
 	cacheTTL := time.Duration(cfg.UmamiCacheTTLSeconds) * time.Second

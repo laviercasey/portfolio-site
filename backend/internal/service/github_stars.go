@@ -34,13 +34,18 @@ type githubRepoResponse struct {
 	StargazersCount int `json:"stargazers_count"`
 }
 
+type Revalidator interface {
+	Revalidate(ctx context.Context, paths []string) error
+}
+
 type GithubStarsService struct {
-	db       *database.DB
-	token    string
-	interval time.Duration
-	logger   *slog.Logger
-	client   *http.Client
-	baseURL  string
+	db          *database.DB
+	token       string
+	interval    time.Duration
+	logger      *slog.Logger
+	client      *http.Client
+	baseURL     string
+	revalidator Revalidator
 }
 
 func NewGithubStarsService(
@@ -63,6 +68,11 @@ func NewGithubStarsService(
 		client:   &http.Client{Timeout: githubClientTimeout},
 		baseURL:  githubAPIBaseURL,
 	}
+}
+
+func (s *GithubStarsService) WithRevalidator(r Revalidator) *GithubStarsService {
+	s.revalidator = r
+	return s
 }
 
 func (s *GithubStarsService) Start(ctx context.Context) {
@@ -94,6 +104,7 @@ func (s *GithubStarsService) SyncAll(ctx context.Context) error {
 		return fmt.Errorf("list projects: %w", err)
 	}
 
+	updated := 0
 	for _, p := range projects {
 		if err := ctx.Err(); err != nil {
 			return err
@@ -129,12 +140,19 @@ func (s *GithubStarsService) SyncAll(ctx context.Context) error {
 			continue
 		}
 
+		updated++
 		s.logger.Info(
 			"github stars: synced",
 			slog.String("slug", p.Slug),
 			slog.String("repo", owner+"/"+repo),
 			slog.Int("stars", stars),
 		)
+	}
+
+	if updated > 0 && s.revalidator != nil {
+		if err := s.revalidator.Revalidate(ctx, []string{"/"}); err != nil {
+			s.logger.Warn("github stars: revalidate failed", slog.String("error", err.Error()))
+		}
 	}
 	return nil
 }
