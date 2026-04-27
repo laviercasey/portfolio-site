@@ -1,0 +1,56 @@
+name: Backend
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  backend-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+          cache-dependency-path: backend/go.sum
+
+      - name: Install gosec
+        run: go install github.com/securego/gosec/v2/cmd/gosec@latest
+
+      - name: Install staticcheck
+        run: go install honnef.co/go/tools/cmd/staticcheck@latest
+
+      - name: Download modules
+        working-directory: backend
+        run: go mod download
+
+      - name: go vet
+        working-directory: backend
+        run: go vet ./...
+
+      - name: staticcheck
+        working-directory: backend
+        run: staticcheck ./...
+
+      - name: gosec
+        working-directory: backend
+        run: gosec -quiet -severity medium ./...
+
+      - name: Run tests with race and coverage
+        working-directory: backend
+        run: go test -race -coverprofile=coverage.out -covermode=atomic ./internal/...
+
+      - name: Coverage gate (>= 80%)
+        working-directory: backend
+        shell: bash
+        run: |
+          total=$(go tool cover -func=coverage.out | grep total | awk '{print $3}' | tr -d '%')
+          echo "Total coverage: ${total}%"
+          awk -v cov="$total" 'BEGIN { if (cov+0 < 80) { exit 1 } }'
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-coverage
+          path: backend/coverage.out

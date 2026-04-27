@@ -1,0 +1,166 @@
+'use client';
+
+import { useState } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import {
+  Briefcase,
+  GraduationCap,
+  Star,
+  FolderKanban,
+  BookOpen,
+  ChevronDown,
+} from 'lucide-react';
+import { ClipReveal } from '@/shared/ui';
+import type { HomepageContent } from '@/entities/content';
+
+interface AboutSectionProps {
+  content: HomepageContent;
+}
+
+export default function AboutSection({ content }: AboutSectionProps) {
+  const t = useTranslations('about');
+  const locale = useLocale();
+  const shouldReduceMotion = useReducedMotion();
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const bio = locale === 'ru' ? content.about.bioRu : content.about.bioEn;
+  const bioFull = locale === 'ru' ? content.about.bioFullRu : content.about.bioFullEn;
+  const hasFullBio = Boolean(bioFull && bioFull.trim().length > 0 && bioFull.trim() !== bio.trim());
+  const { stats } = content.about;
+  const vis = content.visibility;
+
+  const allStats = [
+    { key: 'showStatProjects'      as const, icon: FolderKanban,   value: `${stats.projects}+`,       label: t('projects'),     color: 'text-primary',     bg: 'bg-primary/12' },
+    { key: 'showStatYears'         as const, icon: Briefcase,      value: `${stats.yearsExperience}+`, label: t('experience'),   color: 'text-amber-400',   bg: 'bg-amber-500/12' },
+    { key: 'showStatCertificates'  as const, icon: GraduationCap,  value: `${stats.certificates}+`,    label: t('certificates'), color: 'text-emerald-400', bg: 'bg-emerald-500/12' },
+    { key: 'showStatGithubStars'   as const, icon: Star,           value: `${stats.githubStars}`,      label: t('githubStars'),  color: 'text-yellow-400',  bg: 'bg-yellow-500/12' },
+    { key: 'showStatHabrArticles'  as const, icon: BookOpen,       value: `${stats.habrArticles}`,     label: t('habrArticles'), color: 'text-cyan-400',    bg: 'bg-cyan-500/12' },
+  ];
+  const statItems = allStats.filter(s => vis?.[s.key] !== false);
+
+  return (
+    <section id="about" className="section-py">
+      <div className="container">
+        <ClipReveal direction="left" delay={0} className="mb-8">
+          <span className="font-mono text-xs text-primary uppercase tracking-[0.25em]">
+            {t('label')}
+          </span>
+        </ClipReveal>
+
+        <div className="grid grid-cols-12 gap-4 md:gap-5">
+
+          {vis?.showAboutGif !== false && (
+            <ClipReveal
+              direction="left"
+              delay={0.1}
+              className="col-span-12 md:col-span-5 md:row-span-2"
+            >
+              <div className="relative h-[360px] md:h-full min-h-[400px] rounded-2xl overflow-hidden group border border-white/10 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+                {content.about.gifUrl ? (
+                  <img
+                    src={content.about.gifUrl}
+                    alt={locale === 'ru' ? 'Кейси Лавьер' : 'Casey Laviere'}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center gap-4">
+                    <div className="relative">
+                      <div className="w-24 h-24 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+                        <span className="font-heading italic font-black text-4xl gradient-text">CL</span>
+                      </div>
+                      <div className="absolute inset-0 rounded-2xl border border-primary/30 animate-ping opacity-20" />
+                    </div>
+                    <span className="font-mono text-xs text-muted-foreground/40 uppercase tracking-wider">
+                      GIF placeholder
+                    </span>
+                  </div>
+                )}
+
+                <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
+                  <p className="font-mono text-xs text-white/60 uppercase tracking-widest">{locale === 'ru' ? 'Кейси Лавьер' : 'Casey Laviere'}</p>
+                  <p className="font-mono text-xs text-primary">IT Developer / Freelance</p>
+                </div>
+              </div>
+            </ClipReveal>
+          )}
+
+          {vis?.showAboutBio !== false && (
+            <ClipReveal direction="up" delay={0.15} className={`col-span-12 ${vis?.showAboutGif !== false ? 'md:col-span-7' : 'md:col-span-12'}`}>
+              <div className="glass-card p-7 h-full flex flex-col justify-between min-h-[180px]">
+                <div>
+                  <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 leading-tight">
+                    {t('title')}
+                  </h2>
+                  <p className="text-muted-foreground leading-relaxed whitespace-pre-line">{bio}</p>
+
+                  {hasFullBio && (
+                    <AnimatePresence initial={false}>
+                      {isExpanded && (
+                        <motion.div
+                          key="full-bio"
+                          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
+                          animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, height: 'auto' }}
+                          exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
+                          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pt-4 mt-4 border-t border-white/8">
+                            <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
+                              {bioFull}
+                            </p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  )}
+                </div>
+
+                {hasFullBio && (
+                  <button
+                    type="button"
+                    onClick={() => setIsExpanded((v) => !v)}
+                    className="mt-5 self-start inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-primary hover:text-primary/80 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded"
+                    aria-expanded={isExpanded}
+                  >
+                    <span>{isExpanded ? t('readLess') : t('readMore')}</span>
+                    <ChevronDown
+                      className={`h-3.5 w-3.5 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                      strokeWidth={2}
+                    />
+                  </button>
+                )}
+              </div>
+            </ClipReveal>
+          )}
+
+          <div className={`col-span-12 ${vis?.showAboutGif !== false ? 'md:col-span-7' : 'md:col-span-12'}`}>
+            <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 md:gap-4">
+              {statItems.map(({ icon: Icon, value, label, color, bg }, i) => (
+                <ClipReveal
+                  key={label}
+                  direction="up"
+                  delay={shouldReduceMotion ? 0 : 0.2 + i * 0.06}
+                  className={i >= 3 ? 'col-span-1 sm:col-span-1' : ''}
+                >
+                  <div className="glass-card p-4 md:p-5 flex flex-col items-center justify-center text-center h-full hover:border-primary/30 transition-all duration-300 group">
+                    <div className={`p-2 rounded-xl ${bg} mb-2.5`}>
+                      <Icon className={`h-4 w-4 ${color} group-hover:scale-110 transition-transform`} strokeWidth={1.5} />
+                    </div>
+                    <span className="font-heading text-2xl md:text-3xl font-black gradient-text leading-none">
+                      {value}
+                    </span>
+                    <span className="text-[10px] md:text-xs text-muted-foreground mt-1.5 font-mono uppercase tracking-wider leading-tight">
+                      {label}
+                    </span>
+                  </div>
+                </ClipReveal>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="EcoShop e-commerce platform">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="80%">
+      <stop offset="0%" stop-color="#3a2418"/>
+      <stop offset="60%" stop-color="#1a120c"/>
+      <stop offset="100%" stop-color="#0a0706"/>
+    </radialGradient>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d4a843"/>
+      <stop offset="55%" stop-color="#e07040"/>
+      <stop offset="100%" stop-color="#c45a30"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"  stop-color="#d4a843" stop-opacity="0"/>
+      <stop offset="20%" stop-color="#d4a843" stop-opacity="0.55"/>
+      <stop offset="50%" stop-color="#e07040" stop-opacity="0.95"/>
+      <stop offset="80%" stop-color="#c45a30" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#c45a30" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7dbf5a"/>
+      <stop offset="100%" stop-color="#4a8a30"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+
+  <g stroke="#d4a843" stroke-width="0.5" opacity="0.06">
+    <path d="M0 168 H1200 M0 336 H1200 M0 504 H1200"/>
+    <path d="M200 0 V675 M400 0 V675 M600 0 V675 M800 0 V675 M1000 0 V675"/>
+  </g>
+
+  <!-- pulse line at y=235 (decorative) -->
+  <path d="M0 235 L320 235 L350 235 L370 215 L390 265 L410 195 L430 275 L450 235 L760 235 L780 235 L800 215 L820 265 L840 195 L860 275 L880 235 L1200 235"
+        fill="none" stroke="url(#line)" stroke-width="14" opacity="0.30" filter="url(#glow)"/>
+  <path d="M0 235 L320 235 L350 235 L370 215 L390 265 L410 195 L430 275 L450 235 L760 235 L780 235 L800 215 L820 265 L840 195 L860 275 L880 235 L1200 235"
+        fill="none" stroke="url(#line)" stroke-width="3"/>
+
+  <!-- shopping bag + leaf icon (centered top) -->
+  <g transform="translate(600 245)">
+    <!-- soft glow -->
+    <ellipse cx="0" cy="50" rx="120" ry="100" fill="url(#grad)" opacity="0.16" filter="url(#glow)"/>
+
+    <!-- handle -->
+    <path d="M -40 -22 C -40 -65, 40 -65, 40 -22" stroke="url(#grad)" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <!-- bag body -->
+    <path d="M -78 -8 L 78 -8 L 70 110 L -70 110 Z" fill="url(#grad)"/>
+    <path d="M -78 -8 L 78 -8 L 70 110 L -70 110 Z" fill="#1a120c" opacity="0.20"/>
+    <path d="M -78 -8 L 78 -8 L 70 110 L -70 110 Z" fill="url(#grad)"/>
+
+    <!-- bag highlight -->
+    <path d="M -78 -8 L 78 -8 L 76 4 L -76 4 Z" fill="#fff" opacity="0.18"/>
+
+    <!-- leaf inside bag -->
+    <g transform="translate(0 50) rotate(-25)">
+      <path d="M 0 -28 C 22 -28, 32 -8, 30 14 C 12 22, -12 14, -22 -4 C -22 -16, -14 -28, 0 -28 Z" fill="url(#leaf)"/>
+      <path d="M -8 12 L 16 -20" stroke="#1a120c" stroke-width="1.5" fill="none" opacity="0.5"/>
+    </g>
+  </g>
+
+  <!-- big italic title/metric (centered, safe zone) -->
+  <text x="600" y="475" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-style="italic" font-weight="900" font-size="82"
+        fill="url(#grad)" letter-spacing="-2">Production · Ready</text>
+
+  <!-- 3 role pills (centered ±260 from center) -->
+  <g transform="translate(600 530)" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="20">
+    <g transform="translate(-260 0)">
+      <rect x="-90" y="-22" width="180" height="36" rx="18"
+            fill="#d4a843" fill-opacity="0.10" stroke="#d4a843" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="0" y="4" text-anchor="middle" fill="#d4a843" opacity="0.85" letter-spacing="1">ADMIN</text>
+    </g>
+    <g transform="translate(0 0)">
+      <rect x="-110" y="-22" width="220" height="36" rx="18"
+            fill="#d4a843" fill-opacity="0.10" stroke="#d4a843" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="0" y="4" text-anchor="middle" fill="#d4a843" opacity="0.85" letter-spacing="1">ORDER MANAGER</text>
+    </g>
+    <g transform="translate(260 0)">
+      <rect x="-110" y="-22" width="220" height="36" rx="18"
+            fill="#d4a843" fill-opacity="0.10" stroke="#d4a843" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="0" y="4" text-anchor="middle" fill="#d4a843" opacity="0.85" letter-spacing="1">CONTENT MANAGER</text>
+    </g>
+  </g>
+
+  <text x="600" y="595" text-anchor="middle"
+        font-family="ui-monospace, 'JetBrains Mono', monospace"
+        font-size="20" fill="#d4a843" opacity="0.45"
+        letter-spacing="3">LARAVEL 12 · REACT 19 · MEILISEARCH · 7 DOCKER SERVICES</text>
+</svg>

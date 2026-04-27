@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="TicketHub helpdesk system">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="80%">
+      <stop offset="0%" stop-color="#3a2418"/>
+      <stop offset="60%" stop-color="#1a120c"/>
+      <stop offset="100%" stop-color="#0a0706"/>
+    </radialGradient>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d4a843"/>
+      <stop offset="55%" stop-color="#e07040"/>
+      <stop offset="100%" stop-color="#c45a30"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"  stop-color="#d4a843" stop-opacity="0"/>
+      <stop offset="20%" stop-color="#d4a843" stop-opacity="0.55"/>
+      <stop offset="50%" stop-color="#e07040" stop-opacity="0.95"/>
+      <stop offset="80%" stop-color="#c45a30" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#c45a30" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+
+  <g stroke="#d4a843" stroke-width="0.5" opacity="0.06">
+    <path d="M0 168 H1200 M0 336 H1200 M0 504 H1200"/>
+    <path d="M200 0 V675 M400 0 V675 M600 0 V675 M800 0 V675 M1000 0 V675"/>
+  </g>
+
+  <!-- pulse line at y=235 -->
+  <path d="M0 235 L320 235 L350 235 L370 215 L390 265 L410 195 L430 275 L450 235 L760 235 L780 235 L800 215 L820 265 L840 195 L860 275 L880 235 L1200 235"
+        fill="none" stroke="url(#line)" stroke-width="14" opacity="0.30" filter="url(#glow)"/>
+  <path d="M0 235 L320 235 L350 235 L370 215 L390 265 L410 195 L430 275 L450 235 L760 235 L780 235 L800 215 L820 265 L840 195 L860 275 L880 235 L1200 235"
+        fill="none" stroke="url(#line)" stroke-width="3"/>
+
+  <!-- Ticket icon centered -->
+  <g transform="translate(600 245)">
+    <!-- soft glow -->
+    <ellipse cx="0" cy="40" rx="170" ry="80" fill="url(#grad)" opacity="0.16" filter="url(#glow)"/>
+
+    <!-- ticket body with side notches -->
+    <path d="M -150 -45
+             L 150 -45
+             L 150 -15
+             A 12 12 0 0 0 150 25
+             L 150 55
+             L -150 55
+             L -150 25
+             A 12 12 0 0 0 -150 -15
+             Z"
+          fill="url(#grad)"/>
+    <!-- ticket dashed divider -->
+    <line x1="40" y1="-45" x2="40" y2="55" stroke="#1a120c" stroke-width="2" stroke-dasharray="5 4" opacity="0.55"/>
+
+    <!-- ticket id text on left half -->
+    <text x="-60" y="2" text-anchor="middle"
+          font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="13"
+          fill="#1a120c" opacity="0.7" letter-spacing="2">TICKET</text>
+    <text x="-60" y="28" text-anchor="middle"
+          font-family="Georgia, serif" font-style="italic" font-weight="900" font-size="22"
+          fill="#1a120c" opacity="0.85">#384719</text>
+
+    <!-- priority/status on right half -->
+    <text x="98" y="-18" text-anchor="middle"
+          font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="11"
+          fill="#1a120c" opacity="0.65" letter-spacing="2">PRIORITY</text>
+    <text x="98" y="2" text-anchor="middle"
+          font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="14" font-weight="700"
+          fill="#1a120c" opacity="0.85">HIGH</text>
+    <text x="98" y="32" text-anchor="middle"
+          font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="11"
+          fill="#1a120c" opacity="0.65" letter-spacing="2">OPEN</text>
+
+    <!-- small status dot on right -->
+    <circle cx="135" cy="32" r="5" fill="#7dbf5a"/>
+  </g>
+
+  <!-- big italic version-leap headline (centered) -->
+  <text x="600" y="475" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-style="italic" font-weight="900" font-size="82"
+        fill="url(#grad)" letter-spacing="-2">PHP 5.6 → 8.4</text>
+
+  <!-- 4 surface pills -->
+  <g transform="translate(600 530)" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="18">
+    <g transform="translate(-330 0)">
+      <rect x="-95" y="-22" width="190" height="36" rx="18"
+            fill="#d4a843" fill-opacity="0.10" stroke="#d4a843" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="0" y="4" text-anchor="middle" fill="#d4a843" opacity="0.85" letter-spacing="1">CLIENT PORTAL</text>
+    </g>
+    <g transform="translate(-110 0)">
+      <rect x="-95" y="-22" width="190" height="36" rx="18"
+            fill="#d4a843" fill-opacity="0.10" stroke="#d4a843" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="0" y="4" text-anchor="middle" fill="#d4a843" opacity="0.85" letter-spacing="1">SCP · KANBAN</text>
+    </g>
+    <g transform="translate(110 0)">
+      <rect x="-95" y="-22" width="190" height="36" rx="18"
+            fill="#d4a843" fill-opacity="0.10" stroke="#d4a843" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="0" y="4" text-anchor="middle" fill="#d4a843" opacity="0.85" letter-spacing="1">REST API v1</text>
+    </g>
+    <g transform="translate(330 0)">
+      <rect x="-95" y="-22" width="190" height="36" rx="18"
+            fill="#d4a843" fill-opacity="0.10" stroke="#d4a843" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="0" y="4" text-anchor="middle" fill="#d4a843" opacity="0.85" letter-spacing="1">SMTP · IMAP</text>
+    </g>
+  </g>
+
+  <text x="600" y="595" text-anchor="middle"
+        font-family="ui-monospace, 'JetBrains Mono', monospace"
+        font-size="20" fill="#d4a843" opacity="0.45"
+        letter-spacing="3">PHP 8.4 · MYSQL 8.0 · TAILWIND 3 · 52 PHPUNIT TESTS</text>
+</svg>

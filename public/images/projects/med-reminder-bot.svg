@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Med Reminder Telegram bot">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="80%">
+      <stop offset="0%" stop-color="#3a2418"/>
+      <stop offset="60%" stop-color="#1a120c"/>
+      <stop offset="100%" stop-color="#0a0706"/>
+    </radialGradient>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d4a843"/>
+      <stop offset="55%" stop-color="#e07040"/>
+      <stop offset="100%" stop-color="#c45a30"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"  stop-color="#d4a843" stop-opacity="0"/>
+      <stop offset="20%" stop-color="#d4a843" stop-opacity="0.55"/>
+      <stop offset="50%" stop-color="#e07040" stop-opacity="0.95"/>
+      <stop offset="80%" stop-color="#c45a30" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#c45a30" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="pillGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8c160"/>
+      <stop offset="100%" stop-color="#a87830"/>
+    </linearGradient>
+    <linearGradient id="pillOrange" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8804a"/>
+      <stop offset="100%" stop-color="#a04420"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+
+  <g stroke="#d4a843" stroke-width="0.5" opacity="0.06">
+    <path d="M0 168 H1200 M0 336 H1200 M0 504 H1200"/>
+    <path d="M200 0 V675 M400 0 V675 M600 0 V675 M800 0 V675 M1000 0 V675"/>
+  </g>
+
+  <!-- pulse line at y=235 (heartbeat-style, signals reminders) -->
+  <path d="M0 235 L320 235 L350 235 L370 215 L390 265 L410 195 L430 275 L450 235 L760 235 L780 235 L800 215 L820 265 L840 195 L860 275 L880 235 L1200 235"
+        fill="none" stroke="url(#line)" stroke-width="14" opacity="0.30" filter="url(#glow)"/>
+  <path d="M0 235 L320 235 L350 235 L370 215 L390 265 L410 195 L430 275 L450 235 L760 235 L780 235 L800 215 L820 265 L840 195 L860 275 L880 235 L1200 235"
+        fill="none" stroke="url(#line)" stroke-width="3"/>
+
+  <!-- Pill capsule (centered, slightly tilted) -->
+  <g transform="translate(600 250) rotate(-22)">
+    <!-- glow -->
+    <ellipse cx="0" cy="0" rx="180" ry="60" fill="url(#grad)" opacity="0.18" filter="url(#glow)"/>
+
+    <!-- gold half -->
+    <path d="M -130 0
+             A 50 50 0 0 1 -80 -50
+             L 0 -50
+             L 0 50
+             L -80 50
+             A 50 50 0 0 1 -130 0 Z"
+          fill="url(#pillGold)"/>
+    <!-- gold half highlight -->
+    <path d="M -120 -8
+             A 40 40 0 0 1 -80 -42
+             L 0 -42
+             L 0 -32
+             L -80 -32
+             A 30 30 0 0 0 -110 0
+             Z"
+          fill="#fff" opacity="0.22"/>
+
+    <!-- orange half -->
+    <path d="M 130 0
+             A 50 50 0 0 0 80 -50
+             L 0 -50
+             L 0 50
+             L 80 50
+             A 50 50 0 0 0 130 0 Z"
+          fill="url(#pillOrange)"/>
+    <path d="M 120 -8
+             A 40 40 0 0 0 80 -42
+             L 0 -42
+             L 0 -32
+             L 80 -32
+             A 30 30 0 0 1 110 0
+             Z"
+          fill="#fff" opacity="0.18"/>
+
+    <!-- center join line -->
+    <line x1="0" y1="-50" x2="0" y2="50" stroke="#1a120c" stroke-width="2" opacity="0.45"/>
+  </g>
+
+  <!-- Telegram chat dot (small, decorative) -->
+  <g transform="translate(770 175)">
+    <circle r="22" fill="#229ED9" opacity="0.85"/>
+    <!-- paper-plane -->
+    <path d="M -10 -2 L 10 -8 L 4 8 L 0 2 L -10 -2 Z" fill="#fff"/>
+  </g>
+
+  <!-- big italic centered headline -->
+  <text x="600" y="475" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-style="italic" font-weight="900" font-size="82"
+        fill="url(#grad)" letter-spacing="-2">Zero · install</text>
+
+  <!-- 3 retry-interval pills -->
+  <g transform="translate(600 530)" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="20">
+    <g transform="translate(-260 0)">
+      <rect x="-90" y="-22" width="180" height="36" rx="18"
+            fill="#d4a843" fill-opacity="0.10" stroke="#d4a843" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="0" y="4" text-anchor="middle" fill="#d4a843" opacity="0.85" letter-spacing="1">RETRY · 5 MIN</text>
+    </g>
+    <g transform="translate(0 0)">
+      <rect x="-90" y="-22" width="180" height="36" rx="18"
+            fill="#d4a843" fill-opacity="0.10" stroke="#d4a843" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="0" y="4" text-anchor="middle" fill="#d4a843" opacity="0.85" letter-spacing="1">RETRY · 15 MIN</text>
+    </g>
+    <g transform="translate(260 0)">
+      <rect x="-90" y="-22" width="180" height="36" rx="18"
+            fill="#d4a843" fill-opacity="0.10" stroke="#d4a843" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="0" y="4" text-anchor="middle" fill="#d4a843" opacity="0.85" letter-spacing="1">RETRY · 30 MIN</text>
+    </g>
+  </g>
+
+  <text x="600" y="595" text-anchor="middle"
+        font-family="ui-monospace, 'JetBrains Mono', monospace"
+        font-size="20" fill="#d4a843" opacity="0.45"
+        letter-spacing="3">TELEGRAM MINI APP · REACT · FASTAPI · AIOGRAM · TIMEZONES</text>
+</svg>

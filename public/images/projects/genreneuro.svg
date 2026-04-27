@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="GenreNeuro children book classifier">
+  <defs>
+    <radialGradient id="bg" cx="28%" cy="22%" r="105%">
+      <stop offset="0%" stop-color="#3a2418"/>
+      <stop offset="55%" stop-color="#1a120c"/>
+      <stop offset="100%" stop-color="#0a0706"/>
+    </radialGradient>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d4a843"/>
+      <stop offset="55%" stop-color="#e07040"/>
+      <stop offset="100%" stop-color="#c45a30"/>
+    </linearGradient>
+    <linearGradient id="book" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e07040"/>
+      <stop offset="100%" stop-color="#a04420"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d4a843"/>
+      <stop offset="100%" stop-color="#e07040"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+
+  <!-- soft grid -->
+  <g stroke="#d4a843" stroke-width="0.5" opacity="0.05">
+    <path d="M0 168 H1200 M0 336 H1200 M0 504 H1200"/>
+    <path d="M200 0 V675 M400 0 V675 M600 0 V675 M800 0 V675 M1000 0 V675"/>
+  </g>
+
+  <!-- BOOK (left) -->
+  <g transform="translate(80 145)">
+    <!-- cover -->
+    <rect x="0" y="0" width="200" height="270" rx="6" fill="url(#book)"/>
+    <rect x="0" y="0" width="200" height="14" fill="#fff" opacity="0.18"/>
+    <!-- spine highlight -->
+    <rect x="0" y="14" width="6" height="256" fill="#fff" opacity="0.12"/>
+    <!-- title -->
+    <text x="100" y="80" text-anchor="middle"
+          font-family="Georgia, serif" font-style="italic" font-weight="900"
+          font-size="34" fill="#fff" opacity="0.95">Сказка</text>
+    <text x="100" y="115" text-anchor="middle"
+          font-family="Georgia, serif" font-style="italic" font-weight="700"
+          font-size="22" fill="#fff" opacity="0.75">о лесном</text>
+    <text x="100" y="142" text-anchor="middle"
+          font-family="Georgia, serif" font-style="italic" font-weight="700"
+          font-size="22" fill="#fff" opacity="0.75">королевстве</text>
+    <!-- decorative star -->
+    <text x="100" y="195" text-anchor="middle"
+          font-family="Georgia, serif" font-size="34" fill="#fff" opacity="0.55">✦</text>
+    <!-- bottom band -->
+    <rect x="20" y="225" width="160" height="2" fill="#fff" opacity="0.35"/>
+    <text x="100" y="252" text-anchor="middle"
+          font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="13"
+          fill="#fff" opacity="0.6" letter-spacing="2">6+ · 96 PAGES</text>
+  </g>
+
+  <!-- arrow book → NN -->
+  <g opacity="0.55">
+    <path d="M 295 280 L 380 280" stroke="url(#grad)" stroke-width="3" fill="none"/>
+    <path d="M 370 270 L 390 280 L 370 290 Z" fill="url(#grad)"/>
+  </g>
+
+  <!-- NEURAL NETWORK (middle) -->
+  <g transform="translate(420 130)">
+    <!-- edges (input → hidden 1) -->
+    <g stroke="#d4a843" stroke-width="1" opacity="0.28">
+      <line x1="0" y1="40"  x2="100" y2="20"/>
+      <line x1="0" y1="40"  x2="100" y2="80"/>
+      <line x1="0" y1="40"  x2="100" y2="140"/>
+      <line x1="0" y1="40"  x2="100" y2="200"/>
+      <line x1="0" y1="40"  x2="100" y2="260"/>
+
+      <line x1="0" y1="100" x2="100" y2="20"/>
+      <line x1="0" y1="100" x2="100" y2="80"/>
+      <line x1="0" y1="100" x2="100" y2="140"/>
+      <line x1="0" y1="100" x2="100" y2="200"/>
+      <line x1="0" y1="100" x2="100" y2="260"/>
+
+      <line x1="0" y1="160" x2="100" y2="20"/>
+      <line x1="0" y1="160" x2="100" y2="80"/>
+      <line x1="0" y1="160" x2="100" y2="140"/>
+      <line x1="0" y1="160" x2="100" y2="200"/>
+      <line x1="0" y1="160" x2="100" y2="260"/>
+
+      <line x1="0" y1="220" x2="100" y2="20"/>
+      <line x1="0" y1="220" x2="100" y2="80"/>
+      <line x1="0" y1="220" x2="100" y2="140"/>
+      <line x1="0" y1="220" x2="100" y2="200"/>
+      <line x1="0" y1="220" x2="100" y2="260"/>
+    </g>
+
+    <!-- edges (hidden 1 → hidden 2) -->
+    <g stroke="#d4a843" stroke-width="1" opacity="0.22">
+      <line x1="100" y1="20"  x2="200" y2="50"/>
+      <line x1="100" y1="20"  x2="200" y2="120"/>
+      <line x1="100" y1="20"  x2="200" y2="190"/>
+
+      <line x1="100" y1="80"  x2="200" y2="50"/>
+      <line x1="100" y1="80"  x2="200" y2="120"/>
+      <line x1="100" y1="80"  x2="200" y2="190"/>
+
+      <line x1="100" y1="140" x2="200" y2="50"/>
+      <line x1="100" y1="140" x2="200" y2="120"/>
+      <line x1="100" y1="140" x2="200" y2="190"/>
+
+      <line x1="100" y1="200" x2="200" y2="50"/>
+      <line x1="100" y1="200" x2="200" y2="120"/>
+      <line x1="100" y1="200" x2="200" y2="190"/>
+
+      <line x1="100" y1="260" x2="200" y2="50"/>
+      <line x1="100" y1="260" x2="200" y2="120"/>
+      <line x1="100" y1="260" x2="200" y2="190"/>
+    </g>
+
+    <!-- input layer -->
+    <g fill="#1a120c" stroke="#d4a843" stroke-width="1.5">
+      <circle cx="0" cy="40"  r="9"/>
+      <circle cx="0" cy="100" r="9"/>
+      <circle cx="0" cy="160" r="9"/>
+      <circle cx="0" cy="220" r="9"/>
+    </g>
+
+    <!-- hidden 1 (highlighted, glowing) -->
+    <g>
+      <circle cx="100" cy="20"  r="11" fill="url(#grad)" opacity="0.35" filter="url(#glow)"/>
+      <circle cx="100" cy="80"  r="11" fill="url(#grad)" opacity="0.35" filter="url(#glow)"/>
+      <circle cx="100" cy="140" r="11" fill="url(#grad)" opacity="0.35" filter="url(#glow)"/>
+      <circle cx="100" cy="200" r="11" fill="url(#grad)" opacity="0.35" filter="url(#glow)"/>
+      <circle cx="100" cy="260" r="11" fill="url(#grad)" opacity="0.35" filter="url(#glow)"/>
+      <circle cx="100" cy="20"  r="9" fill="url(#grad)"/>
+      <circle cx="100" cy="80"  r="9" fill="url(#grad)"/>
+      <circle cx="100" cy="140" r="9" fill="url(#grad)"/>
+      <circle cx="100" cy="200" r="9" fill="url(#grad)"/>
+      <circle cx="100" cy="260" r="9" fill="url(#grad)"/>
+    </g>
+
+    <!-- hidden 2 -->
+    <g fill="#1a120c" stroke="#d4a843" stroke-width="1.5">
+      <circle cx="200" cy="50"  r="9"/>
+      <circle cx="200" cy="120" r="9"/>
+      <circle cx="200" cy="190" r="9"/>
+    </g>
+  </g>
+
+  <!-- arrow NN → labels -->
+  <g opacity="0.55">
+    <path d="M 660 280 L 745 280" stroke="url(#grad)" stroke-width="3" fill="none"/>
+    <path d="M 735 270 L 755 280 L 735 290 Z" fill="url(#grad)"/>
+  </g>
+
+  <!-- GENRE LABELS with bars (right) -->
+  <g transform="translate(770 145)" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="18">
+    <!-- WINNER row: fairy tale 89% -->
+    <g>
+      <text x="0" y="20" fill="url(#grad)" font-weight="700" font-size="20">сказка</text>
+      <text x="370" y="20" fill="url(#grad)" font-weight="700" font-size="20" text-anchor="end">89.16%</text>
+      <rect x="0" y="32" width="370" height="10" rx="5" fill="#d4a843" opacity="0.12"/>
+      <rect x="0" y="32" width="330" height="10" rx="5" fill="url(#bar)"/>
+    </g>
+
+    <!-- row 2: poetry 4% -->
+    <g transform="translate(0 60)">
+      <text x="0" y="20" fill="#fff" opacity="0.7">стихи</text>
+      <text x="370" y="20" fill="#fff" opacity="0.7" text-anchor="end">4.21%</text>
+      <rect x="0" y="32" width="370" height="10" rx="5" fill="#d4a843" opacity="0.12"/>
+      <rect x="0" y="32" width="20" height="10" rx="5" fill="#d4a843" opacity="0.55"/>
+    </g>
+
+    <!-- row 3: повесть 3% -->
+    <g transform="translate(0 120)">
+      <text x="0" y="20" fill="#fff" opacity="0.7">повесть</text>
+      <text x="370" y="20" fill="#fff" opacity="0.7" text-anchor="end">2.84%</text>
+      <rect x="0" y="32" width="370" height="10" rx="5" fill="#d4a843" opacity="0.12"/>
+      <rect x="0" y="32" width="14" height="10" rx="5" fill="#d4a843" opacity="0.45"/>
+    </g>
+
+    <!-- row 4: познавательное 2% -->
+    <g transform="translate(0 180)">
+      <text x="0" y="20" fill="#fff" opacity="0.55">познавательное</text>
+      <text x="370" y="20" fill="#fff" opacity="0.55" text-anchor="end">1.93%</text>
+      <rect x="0" y="32" width="370" height="10" rx="5" fill="#d4a843" opacity="0.12"/>
+      <rect x="0" y="32" width="9" height="10" rx="5" fill="#d4a843" opacity="0.4"/>
+    </g>
+
+    <!-- row 5: рассказ 1% -->
+    <g transform="translate(0 240)">
+      <text x="0" y="20" fill="#fff" opacity="0.45">рассказ</text>
+      <text x="370" y="20" fill="#fff" opacity="0.45" text-anchor="end">1.18%</text>
+      <rect x="0" y="32" width="370" height="10" rx="5" fill="#d4a843" opacity="0.12"/>
+      <rect x="0" y="32" width="6" height="10" rx="5" fill="#d4a843" opacity="0.35"/>
+    </g>
+
+    <!-- row 6: фольклор 0.6% -->
+    <g transform="translate(0 300)">
+      <text x="0" y="20" fill="#fff" opacity="0.4">фольклор</text>
+      <text x="370" y="20" fill="#fff" opacity="0.4" text-anchor="end">0.68%</text>
+      <rect x="0" y="32" width="370" height="10" rx="5" fill="#d4a843" opacity="0.12"/>
+      <rect x="0" y="32" width="3" height="10" rx="5" fill="#d4a843" opacity="0.3"/>
+    </g>
+  </g>
+
+  <!-- Caption -->
+  <text x="80" y="625" font-family="ui-monospace, 'JetBrains Mono', monospace"
+        font-size="22" fill="#d4a843" opacity="0.55"
+        letter-spacing="2">PYTORCH · TEXT CLASSIFIER · 6 GENRES · 89.16% ACCURACY</text>
+</svg>

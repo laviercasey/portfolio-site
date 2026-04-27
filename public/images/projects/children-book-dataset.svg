@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Children book dataset parser">
+  <defs>
+    <radialGradient id="bg" cx="28%" cy="22%" r="105%">
+      <stop offset="0%" stop-color="#3a2418"/>
+      <stop offset="55%" stop-color="#1a120c"/>
+      <stop offset="100%" stop-color="#0a0706"/>
+    </radialGradient>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d4a843"/>
+      <stop offset="55%" stop-color="#e07040"/>
+      <stop offset="100%" stop-color="#c45a30"/>
+    </linearGradient>
+    <linearGradient id="bookA" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e07040"/>
+      <stop offset="100%" stop-color="#a04420"/>
+    </linearGradient>
+    <linearGradient id="bookB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4a843"/>
+      <stop offset="100%" stop-color="#8a6a20"/>
+    </linearGradient>
+    <linearGradient id="bookC" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c45a30"/>
+      <stop offset="100%" stop-color="#7a3818"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+
+  <!-- soft grid -->
+  <g stroke="#d4a843" stroke-width="0.5" opacity="0.05">
+    <path d="M0 168 H1200 M0 336 H1200 M0 504 H1200"/>
+    <path d="M200 0 V675 M400 0 V675 M600 0 V675 M800 0 V675 M1000 0 V675"/>
+  </g>
+
+  <!-- Stack of books (left cluster) -->
+  <g transform="translate(220 200)">
+    <!-- shadow -->
+    <ellipse cx="180" cy="320" rx="220" ry="14" fill="#000" opacity="0.45" filter="url(#glow)"/>
+
+    <!-- bottom book (laying horizontally) -->
+    <g transform="translate(0 270)">
+      <rect x="-10" y="0" width="380" height="36" rx="4" fill="url(#bookA)"/>
+      <rect x="-10" y="0" width="380" height="6" fill="#fff" opacity="0.18"/>
+      <rect x="-10" y="6" width="14" height="30" fill="#000" opacity="0.25"/>
+      <rect x="366" y="6" width="14" height="30" fill="#000" opacity="0.25"/>
+    </g>
+
+    <!-- middle book (slightly tilted) -->
+    <g transform="translate(20 200) rotate(-2)">
+      <rect x="0" y="0" width="350" height="60" rx="4" fill="url(#bookB)"/>
+      <rect x="0" y="0" width="350" height="10" fill="#fff" opacity="0.20"/>
+      <rect x="0" y="10" width="14" height="50" fill="#000" opacity="0.25"/>
+      <rect x="336" y="10" width="14" height="50" fill="#000" opacity="0.25"/>
+      <text x="175" y="40" text-anchor="middle"
+            font-family="Georgia, serif" font-style="italic" font-weight="700"
+            font-size="22" fill="#1a120c" opacity="0.6">fairy tales</text>
+    </g>
+
+    <!-- top book (more tilted) -->
+    <g transform="translate(45 130) rotate(3)">
+      <rect x="0" y="0" width="320" height="58" rx="4" fill="url(#bookC)"/>
+      <rect x="0" y="0" width="320" height="10" fill="#fff" opacity="0.18"/>
+      <rect x="0" y="10" width="13" height="48" fill="#000" opacity="0.25"/>
+      <rect x="307" y="10" width="13" height="48" fill="#000" opacity="0.25"/>
+      <text x="160" y="40" text-anchor="middle"
+            font-family="Georgia, serif" font-style="italic" font-weight="700"
+            font-size="22" fill="#fff" opacity="0.85">poetry</text>
+    </g>
+
+    <!-- standing book on top -->
+    <g transform="translate(120 0)">
+      <rect x="0" y="0" width="160" height="130" rx="4" fill="url(#bookA)"/>
+      <rect x="0" y="0" width="160" height="10" fill="#fff" opacity="0.20"/>
+      <text x="80" y="80" text-anchor="middle"
+            font-family="Georgia, serif" font-style="italic" font-weight="900"
+            font-size="44" fill="#fff" opacity="0.92">A</text>
+    </g>
+  </g>
+
+  <!-- JSON code block (right) -->
+  <g transform="translate(680 170)" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="22">
+    <!-- bracket -->
+    <text x="0" y="0" fill="url(#grad)" font-size="46" font-weight="700">{</text>
+    <text x="40" y="40" fill="#d4a843" opacity="0.85">"title":</text>
+    <text x="190" y="40" fill="#fff" opacity="0.55">"…",</text>
+    <text x="40" y="80" fill="#d4a843" opacity="0.85">"age":</text>
+    <text x="160" y="80" fill="#e07040" opacity="0.85">"6-9",</text>
+    <text x="40" y="120" fill="#d4a843" opacity="0.85">"genre":</text>
+    <text x="195" y="120" fill="#e07040" opacity="0.85">"fairy",</text>
+    <text x="40" y="160" fill="#d4a843" opacity="0.85">"pages":</text>
+    <text x="195" y="160" fill="#e07040" opacity="0.85">96,</text>
+    <text x="40" y="200" fill="#d4a843" opacity="0.85">"isbn":</text>
+    <text x="180" y="200" fill="#fff" opacity="0.55">"…"</text>
+    <text x="0" y="240" fill="url(#grad)" font-size="46" font-weight="700">}</text>
+  </g>
+
+  <!-- arrow flow: book → JSON -->
+  <g opacity="0.45">
+    <path d="M 580 360 L 670 360" stroke="url(#grad)" stroke-width="3" fill="none"/>
+    <path d="M 660 350 L 680 360 L 660 370 Z" fill="url(#grad)"/>
+  </g>
+
+  <!-- Caption -->
+  <text x="80" y="615" font-family="ui-monospace, 'JetBrains Mono', monospace"
+        font-size="22" fill="#d4a843" opacity="0.55"
+        letter-spacing="2">PYTHON · PARSER · LABELED CHILDREN-BOOKS DATASET</text>
+</svg>
