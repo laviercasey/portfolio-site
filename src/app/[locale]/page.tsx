@@ -1,15 +1,17 @@
+import dynamic from 'next/dynamic';
 import { setRequestLocale } from 'next-intl/server';
 import { projectsService } from '@/entities/project';
 import { contentService } from '@/entities/content';
 import { careerService } from '@/entities/career';
 import { HeroSection } from '@/widgets/hero-section';
-import { AboutSection } from '@/widgets/about-section';
-import { ProjectCarousel } from '@/widgets/project-carousel';
-import { HowIWorkSection } from '@/widgets/how-i-work-section';
-import { EducationSnapshot } from '@/widgets/education-snapshot';
-import { WorkHistoryTimeline } from '@/widgets/work-history-timeline';
-import { ContactCTA } from '@/widgets/contact-cta';
 import { Marquee } from '@/shared/ui';
+
+const AboutSection = dynamic(() => import('@/widgets/about-section/ui/AboutSection'));
+const ProjectCarousel = dynamic(() => import('@/widgets/project-carousel/ui/ProjectCarousel'));
+const HowIWorkSection = dynamic(() => import('@/widgets/how-i-work-section/ui/HowIWorkSection'));
+const EducationSnapshot = dynamic(() => import('@/widgets/education-snapshot/ui/EducationSnapshot'));
+const WorkHistoryTimeline = dynamic(() => import('@/widgets/work-history-timeline/ui/WorkHistoryTimeline'));
+const ContactCTA = dynamic(() => import('@/widgets/contact-cta/ui/ContactCTA'));
 
 export const revalidate = 600;
 
