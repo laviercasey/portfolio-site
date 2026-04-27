@@ -10,11 +10,7 @@ import type { SiteConfig } from '@/shared/types';
 
 const site = siteJson as SiteConfig;
 
-export const revalidate = 600;
-
-export function generateStaticParams() {
-  return [];
-}
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({
   params,

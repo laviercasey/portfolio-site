@@ -4,6 +4,9 @@ const withNextIntl = createNextIntlPlugin('./src/shared/config/i18n/request.ts')
 const nextConfig = {
   output: 'standalone',
   trailingSlash: false,
+  experimental: {
+    inlineCss: true,
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
