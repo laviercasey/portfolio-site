@@ -360,17 +360,21 @@ func (s *AnalyticsService) Timeseries(
 	return typed, nil
 }
 
-type umamiStatField struct {
-	Value int64 `json:"value"`
-	Prev  int64 `json:"prev"`
+type umamiStatComparison struct {
+	Pageviews int64 `json:"pageviews"`
+	Visitors  int64 `json:"visitors"`
+	Visits    int64 `json:"visits"`
+	Bounces   int64 `json:"bounces"`
+	TotalTime int64 `json:"totaltime"`
 }
 
 type umamiStats struct {
-	Pageviews umamiStatField `json:"pageviews"`
-	Visitors  umamiStatField `json:"visitors"`
-	Visits    umamiStatField `json:"visits"`
-	Bounces   umamiStatField `json:"bounces"`
-	TotalTime umamiStatField `json:"totaltime"`
+	Pageviews  int64               `json:"pageviews"`
+	Visitors   int64               `json:"visitors"`
+	Visits     int64               `json:"visits"`
+	Bounces    int64               `json:"bounces"`
+	TotalTime  int64               `json:"totaltime"`
+	Comparison umamiStatComparison `json:"comparison"`
 }
 
 type umamiMetric struct {
@@ -392,6 +396,9 @@ func (s *AnalyticsService) fetchSummary(
 	q := url.Values{}
 	q.Set("startAt", strconv.FormatInt(startMs, 10))
 	q.Set("endAt", strconv.FormatInt(endMs, 10))
+	q.Set("unit", "day")
+	q.Set("timezone", "UTC")
+	q.Set("compare", "prev")
 
 	var stats umamiStats
 	if err := s.get(ctx, s.websitePath("stats"), q, &stats); err != nil {
@@ -399,8 +406,8 @@ func (s *AnalyticsService) fetchSummary(
 	}
 
 	bounceRate := 0.0
-	if stats.Visits.Value > 0 {
-		bounceRate = float64(stats.Bounces.Value) / float64(stats.Visits.Value)
+	if stats.Visits > 0 {
+		bounceRate = float64(stats.Bounces) / float64(stats.Visits)
 	}
 	if bounceRate < 0 {
 		bounceRate = 0
@@ -410,22 +417,22 @@ func (s *AnalyticsService) fetchSummary(
 	}
 
 	avgSession := int64(0)
-	if stats.Visits.Value > 0 {
-		avgSession = stats.TotalTime.Value / stats.Visits.Value
+	if stats.Visits > 0 {
+		avgSession = stats.TotalTime / stats.Visits
 	}
 	if avgSession < 0 {
 		avgSession = 0
 	}
 
-	prev := stats.Pageviews.Prev
+	prev := stats.Comparison.Pageviews
 	delta := 0.0
 	switch {
-	case prev == 0 && stats.Pageviews.Value == 0:
+	case prev == 0 && stats.Pageviews == 0:
 		delta = 0
 	case prev == 0:
 		delta = 10
 	default:
-		delta = (float64(stats.Pageviews.Value) - float64(prev)) / float64(prev)
+		delta = (float64(stats.Pageviews) - float64(prev)) / float64(prev)
 	}
 	if delta > 10 {
 		delta = 10
@@ -439,8 +446,8 @@ func (s *AnalyticsService) fetchSummary(
 
 	return &model.AnalyticsSummary{
 		Range:             rng,
-		Pageviews:         stats.Pageviews.Value,
-		UniqueVisitors:    stats.Visitors.Value,
+		Pageviews:         stats.Pageviews,
+		UniqueVisitors:    stats.Visitors,
 		BounceRate:        bounceRate,
 		AvgSessionSeconds: avgSession,
 		DeltaPageviews:    delta,
@@ -453,7 +460,7 @@ func (s *AnalyticsService) fetchTopPages(
 	rng string,
 	limit int,
 ) ([]model.TopPage, error) {
-	metrics, err := s.fetchMetrics(ctx, rng, "url", limit)
+	metrics, err := s.fetchMetrics(ctx, rng, "path", limit)
 	if err != nil {
 		return nil, err
 	}
@@ -556,6 +563,8 @@ func (s *AnalyticsService) fetchMetrics(
 	q := url.Values{}
 	q.Set("startAt", strconv.FormatInt(startMs, 10))
 	q.Set("endAt", strconv.FormatInt(endMs, 10))
+	q.Set("unit", "day")
+	q.Set("timezone", "UTC")
 	q.Set("type", kind)
 	q.Set("limit", strconv.Itoa(limit))
 
