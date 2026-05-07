@@ -12,7 +12,7 @@ function buildAlternates(path: string, baseUrl: string) {
   for (const locale of LOCALES) {
     languages[locale] = `${baseUrl}/${locale}${path}`;
   }
-  languages['x-default'] = `${baseUrl}/ru${path}`;
+  languages['x-default'] = `${baseUrl}/en${path}`;
   return { languages };
 }
 

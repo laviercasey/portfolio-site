@@ -274,7 +274,7 @@ export default function HowIWorkSection({ content }: Props) {
                   return (
                     <button key={i} onClick={() => handleStepClick(i)} className="relative text-left w-full focus:outline-none group">
                       <div className={`
-                        absolute -left-8 top-1 w-3 h-3 rounded-full border-2 transition-all duration-300
+                        absolute -left-7 w-4 h-4 rounded-full border-2 transition-all duration-300
                         ${isActive
                           ? 'bg-primary border-primary shadow-md shadow-primary/30 scale-125'
                           : i < activeStep

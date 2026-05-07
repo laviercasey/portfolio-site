@@ -67,16 +67,13 @@ export default function AboutSection({ content, projects = [] }: AboutSectionPro
                     const staticUrl = isSvg ? url.replace(/\.svg$/i, '-static.svg') : url;
                     const alt = locale === 'ru' ? 'Кейси Лавьер' : 'Casey Laviere';
                     return (
-                      <picture>
-                        <source media="(min-width: 768px)" srcSet={url} />
-                        <img
-                          src={staticUrl}
-                          alt={alt}
-                          loading="lazy"
-                          decoding="async"
-                          className="w-full h-full object-cover"
-                        />
-                      </picture>
+                      <img
+                        src={staticUrl}
+                        alt={alt}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
                     );
                   })()
                 ) : (
