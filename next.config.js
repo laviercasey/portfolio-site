@@ -26,13 +26,19 @@ const nextConfig = {
       } catch {}
     }
 
+    const yandexEnabled = !!process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID;
+    const yandexScript = yandexEnabled ? ' https://mc.yandex.ru https://mc.webvisor.org' : '';
+    const yandexConnect = yandexEnabled ? ' https://mc.yandex.ru https://mc.webvisor.org https://mc.webvisor.com' : '';
+    const yandexFrame = yandexEnabled ? ' https://mc.yandex.ru' : '';
+
     const csp = [
       "default-src 'self'",
-      `script-src 'self' 'unsafe-inline'${umamiOrigin ? ' ' + umamiOrigin : ''}`,
+      `script-src 'self' 'unsafe-inline'${umamiOrigin ? ' ' + umamiOrigin : ''}${yandexScript}`,
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "img-src 'self' data: blob: https:",
       "font-src 'self' https://fonts.gstatic.com",
-      `connect-src 'self'${umamiOrigin ? ' ' + umamiOrigin : ''}`,
+      `connect-src 'self'${umamiOrigin ? ' ' + umamiOrigin : ''}${yandexConnect}`,
+      `frame-src 'self'${yandexFrame}`,
       "object-src 'none'",
       "base-uri 'self'",
       "frame-ancestors 'none'",

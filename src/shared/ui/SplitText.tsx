@@ -36,8 +36,8 @@ export default function SplitText({
               <motion.span
                 key={index}
                 className="inline-block"
-                initial={{ y: '110%', opacity: 0 }}
-                animate={{ y: '0%', opacity: 1 }}
+                initial={{ y: '110%' }}
+                animate={{ y: '0%' }}
                 transition={{
                   delay: delay + index * 0.028,
                   duration: 0.55,

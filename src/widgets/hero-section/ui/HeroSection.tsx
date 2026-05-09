@@ -78,7 +78,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
     visible: { transition: { staggerChildren: shouldReduceMotion ? 0 : 0.1, delayChildren: 0.3 } },
   };
   const fadeUp = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
+    hidden: { opacity: 1, y: shouldReduceMotion ? 0 : 16 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
 

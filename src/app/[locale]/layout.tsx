@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/shared/config';
 import { Header } from '@/widgets/header';
 import { Footer } from '@/widgets/footer';
-import { ThemeProvider, Umami, UtmCleanup } from '@/app/providers';
+import { ThemeProvider, Umami, UtmCleanup, YandexMetrika } from '@/app/providers';
 import { themeScript } from '@/shared/lib';
 import { contentService } from '@/entities/content';
 import { CustomCursor } from '@/shared/ui';
@@ -172,6 +172,7 @@ export default async function LocaleLayout({
       </head>
       <body className="font-sans antialiased">
         <Umami />
+        <YandexMetrika />
         <UtmCleanup />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider>
