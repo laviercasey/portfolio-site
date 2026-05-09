@@ -51,6 +51,7 @@ func run(log *slog.Logger) error {
 	careerSvc := service.NewCareerService(db)
 	inquirySvc := service.NewInquiryService(db)
 	uploadSvc := service.NewUploadService(db, cfg.UploadDir)
+	servicesSvc := service.NewServicesService(db)
 
 	revalidator := service.NewRevalidateService(cfg.RevalidateURL, cfg.RevalidateSecret, log)
 	if revalidator.Enabled() {
@@ -87,6 +88,7 @@ func run(log *slog.Logger) error {
 		Inquiry:   handler.NewInquiryHandler(inquirySvc),
 		Upload:    handler.NewUploadHandler(uploadSvc),
 		Analytics: handler.NewAnalyticsHandler(analyticsSvc, log),
+		Services:  handler.NewServicesHandler(servicesSvc).WithRevalidator(revalidator),
 	}
 
 	r := router.New(router.Deps{

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard, FolderOpen, FileText, Inbox, Image as ImageIcon,
-  LogOut, ChevronRight, Code2, MessageSquare, GraduationCap,
+  LogOut, ChevronRight, Code2, MessageSquare, GraduationCap, Wrench,
 } from 'lucide-react';
 import { Button } from '@/shared/ui';
 import { cn } from '@/shared/lib';
@@ -12,6 +12,7 @@ import { cn } from '@/shared/lib';
 const navItems = [
   { label: 'Dashboard', icon: LayoutDashboard, path: 'dashboard' },
   { label: 'Projects', icon: FolderOpen, path: 'projects' },
+  { label: 'Services', icon: Wrench, path: 'services' },
   { label: 'Content', icon: FileText, path: 'content' },
   { label: 'Career', icon: GraduationCap, path: 'career' },
   { label: 'Contact', icon: MessageSquare, path: 'contact' },

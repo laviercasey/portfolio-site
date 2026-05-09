@@ -21,6 +21,7 @@ type Handlers struct {
 	Inquiry   *handler.InquiryHandler
 	Upload    *handler.UploadHandler
 	Analytics *handler.AnalyticsHandler
+	Services  *handler.ServicesHandler
 }
 
 type Deps struct {
@@ -61,6 +62,11 @@ func New(deps Deps) chi.Router {
 
 		r.Get("/career", deps.Handlers.Career.GetAll)
 
+		r.Get("/services", deps.Handlers.Services.GetPageData)
+		r.Get("/services/list", deps.Handlers.Services.ListServices)
+		r.Get("/services/faqs", deps.Handlers.Services.ListFaqs)
+		r.Get("/services/process", deps.Handlers.Services.ListProcessSteps)
+
 		r.With(inquiryLimiter.Limit).Post("/inquiries", deps.Handlers.Inquiry.Create)
 
 		r.Group(func(r chi.Router) {
@@ -75,6 +81,18 @@ func New(deps Deps) chi.Router {
 			r.Post("/career/{type}", deps.Handlers.Career.Create)
 			r.Put("/career/{type}/{id}", deps.Handlers.Career.Update)
 			r.Delete("/career/{type}/{id}", deps.Handlers.Career.Delete)
+
+			r.Post("/services", deps.Handlers.Services.CreateService)
+			r.Put("/services/{id}", deps.Handlers.Services.UpdateService)
+			r.Delete("/services/{id}", deps.Handlers.Services.DeleteService)
+
+			r.Post("/services/faqs", deps.Handlers.Services.CreateFaq)
+			r.Put("/services/faqs/{id}", deps.Handlers.Services.UpdateFaq)
+			r.Delete("/services/faqs/{id}", deps.Handlers.Services.DeleteFaq)
+
+			r.Post("/services/process", deps.Handlers.Services.CreateProcessStep)
+			r.Put("/services/process/{id}", deps.Handlers.Services.UpdateProcessStep)
+			r.Delete("/services/process/{id}", deps.Handlers.Services.DeleteProcessStep)
 
 			r.Get("/inquiries", deps.Handlers.Inquiry.List)
 			r.Get("/inquiries/{id}", deps.Handlers.Inquiry.GetByID)

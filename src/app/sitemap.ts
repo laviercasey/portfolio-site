@@ -25,14 +25,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   } catch {
   }
 
-  const staticRoutes = ['', '/projects', '/career', '/contact'] as const;
+  const staticRoutes = ['', '/services', '/projects', '/career', '/contact'] as const;
 
   const staticEntries = LOCALES.flatMap((locale) =>
     staticRoutes.map((route) => ({
       url: `${site.url}/${locale}${route}`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
-      priority: route === '' ? 1 : 0.8,
+      priority: route === '' ? 1 : route === '/services' ? 0.9 : 0.8,
       alternates: buildAlternates(route, site.url),
     })),
   );

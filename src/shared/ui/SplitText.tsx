@@ -29,7 +29,11 @@ export default function SplitText({
   return (
     <Tag className={className} aria-label={text}>
       {words.map((word, wi) => (
-        <span key={wi} className="inline-block overflow-hidden" style={{ marginRight: '0.22em' }}>
+        <span
+          key={wi}
+          className="inline-block overflow-hidden"
+          style={wi < words.length - 1 ? { marginRight: '0.22em' } : undefined}
+        >
           {word.split('').map((char) => {
             const index = charCount++;
             return (

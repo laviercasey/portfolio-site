@@ -14,6 +14,7 @@ import { cn } from '@/shared/lib';
 
 const navLinks = [
   { key: 'home', href: '/' },
+  { key: 'services', href: '/services' },
   { key: 'projects', href: '/projects' },
   { key: 'career', href: '/career' },
   { key: 'contact', href: '/contact' },
@@ -51,7 +52,7 @@ export default function Header() {
             <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-primary/10 border border-primary/20">
               <Code2 className="h-4 w-4 text-primary" strokeWidth={2} />
             </div>
-            <span className="font-heading text-sm tracking-tight">{siteName}</span>
+            <span className="font-heading text-sm md:text-base tracking-tight">{siteName}</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-1">
@@ -59,7 +60,7 @@ export default function Header() {
               <Link
                 key={key}
                 href={href}
-                className="px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground rounded-lg hover:bg-white/8 transition-all duration-200"
+                className="px-3 py-1.5 text-sm lg:text-base font-medium text-muted-foreground hover:text-foreground rounded-lg hover:bg-white/8 transition-all duration-200"
               >
                 {t(key)}
               </Link>
