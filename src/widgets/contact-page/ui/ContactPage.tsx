@@ -41,14 +41,14 @@ interface InfoRowProps {
 function InfoRow({ icon: Icon, label, value }: InfoRowProps) {
   return (
     <div className="flex items-start gap-3">
-      <span className="mt-0.5 p-2 rounded-lg bg-primary/10 text-primary flex-shrink-0">
-        <Icon className="h-4 w-4" />
+      <span className="mt-0.5 p-2 md:p-2.5 rounded-lg bg-primary/10 text-primary flex-shrink-0">
+        <Icon className="h-4 w-4 md:h-5 md:w-5" />
       </span>
       <div className="min-w-0">
-        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground/70 mb-1">
+        <p className="font-mono text-xs md:text-sm uppercase tracking-[0.18em] text-muted-foreground/70 mb-1">
           {label}
         </p>
-        <p className="text-sm text-foreground/90 leading-snug">{value}</p>
+        <p className="text-sm md:text-base lg:text-lg text-foreground/90 leading-snug">{value}</p>
       </div>
     </div>
   );
@@ -66,10 +66,10 @@ export default function ContactPage({ config, socialLinks }: Props) {
   return (
     <div className="container py-24 max-w-6xl">
       <ClipReveal direction="up" className="mb-14">
-        <h1 className="font-heading text-5xl md:text-6xl font-bold mb-3 gradient-text">
+        <h1 className="font-heading text-5xl md:text-6xl font-bold mb-3 md:mb-4 gradient-text">
           {isRu ? config.heading.ru : config.heading.en}
         </h1>
-        <p className="text-lg text-muted-foreground max-w-xl">
+        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
           {isRu ? config.subtitle.ru : config.subtitle.en}
         </p>
       </ClipReveal>
@@ -81,20 +81,20 @@ export default function ContactPage({ config, socialLinks }: Props) {
         className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start"
       >
         <motion.div variants={fadeUp} className="lg:col-span-7 space-y-5">
-          <div className="glass-card p-6">
+          <div className="glass-card p-6 md:p-7">
             <div className="flex items-center gap-2 mb-4">
               <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              <h2 className="font-heading font-semibold text-sm uppercase tracking-wider text-muted-foreground">
+              <h2 className="font-heading font-semibold text-sm md:text-base uppercase tracking-wider text-muted-foreground">
                 {t('howIWork')}
               </h2>
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed">
               {isRu ? config.howIWork.ru : config.howIWork.en}
             </p>
 
             {primaryContacts.length > 0 && (
               <div className="mt-5 pt-5 border-t border-white/8">
-                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground/70 mb-3">
+                <p className="font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-muted-foreground/70 mb-3">
                   {t('quickContacts')}
                 </p>
                 <div className="flex flex-col gap-2">
@@ -105,12 +105,12 @@ export default function ContactPage({ config, socialLinks }: Props) {
                         key={link.platform}
                         href={safeHref(link.url)}
                         {...(link.url.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                        className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/[0.03] border border-white/8 hover:border-primary/30 hover:bg-primary/5 transition-all group"
+                        className="flex items-center gap-3 px-3 py-2.5 md:py-3 rounded-lg bg-white/[0.03] border border-white/8 hover:border-primary/30 hover:bg-primary/5 transition-all group"
                       >
-                        <span className="p-1.5 rounded-md bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
-                          <Icon className="h-3.5 w-3.5" />
+                        <span className="p-1.5 md:p-2 rounded-md bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
+                          <Icon className="h-3.5 w-3.5 md:h-4 md:w-4" />
                         </span>
-                        <span className="font-mono text-sm text-foreground/90 truncate">
+                        <span className="font-mono text-sm md:text-base text-foreground/90 truncate">
                           {formatHandle(link)}
                         </span>
                       </a>
@@ -136,12 +136,12 @@ export default function ContactPage({ config, socialLinks }: Props) {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.15 + i * 0.05, duration: 0.4 }}
                   >
-                    <div className="p-2 rounded-lg bg-primary/10 text-primary w-fit group-hover:bg-primary/20 transition-colors">
-                      <Icon className="h-4 w-4" />
+                    <div className="p-2 md:p-2.5 rounded-lg bg-primary/10 text-primary w-fit group-hover:bg-primary/20 transition-colors">
+                      <Icon className="h-4 w-4 md:h-5 md:w-5" />
                     </div>
                     <div>
-                      <p className="font-medium text-sm">{link.platform}</p>
-                      <p className="text-xs text-muted-foreground truncate font-mono">
+                      <p className="font-medium text-sm md:text-base">{link.platform}</p>
+                      <p className="text-xs md:text-sm text-muted-foreground truncate font-mono">
                         {link.url.replace(/^https?:\/\//, '').replace(/^mailto:/, '')}
                       </p>
                     </div>
@@ -153,8 +153,8 @@ export default function ContactPage({ config, socialLinks }: Props) {
         </motion.div>
 
         <motion.div variants={fadeUp} className="lg:col-span-5">
-          <div className="glass-card p-6">
-            <h2 className="font-heading font-semibold text-sm uppercase tracking-wider text-muted-foreground mb-5">
+          <div className="glass-card p-6 md:p-7">
+            <h2 className="font-heading font-semibold text-sm md:text-base uppercase tracking-wider text-muted-foreground mb-5">
               {t('atGlance')}
             </h2>
             <div className="space-y-5">

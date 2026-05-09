@@ -19,7 +19,7 @@ export default function ProjectTechChoices({ choices }: Props) {
 
   return (
     <section className="glass-card p-6 rounded-xl">
-      <h2 className="font-heading text-lg font-bold mb-5 flex items-center gap-2">
+      <h2 className="font-heading text-lg lg:text-xl font-bold mb-5 flex items-center gap-2">
         <Wrench className="h-4 w-4 text-primary" />
         {t('techChoicesTitle')}
       </h2>
@@ -35,11 +35,11 @@ export default function ProjectTechChoices({ choices }: Props) {
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.35, delay: i * 0.05 }}
             >
-              <span className="font-mono text-sm px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 self-start break-all sm:shrink-0 sm:break-normal">
+              <span className="font-mono text-sm md:text-base px-2 py-0.5 md:px-2.5 rounded bg-primary/10 text-primary border border-primary/20 self-start break-all sm:shrink-0 sm:break-normal">
                 {c.tech}
               </span>
               {reason && (
-                <span className="text-sm text-muted-foreground leading-relaxed break-words min-w-0">
+                <span className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed break-words min-w-0">
                   <span className="hidden sm:inline">— </span>{reason}
                 </span>
               )}

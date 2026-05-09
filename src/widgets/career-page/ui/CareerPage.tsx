@@ -48,7 +48,7 @@ export default function CareerPage({ career, locale, projects = [] }: Props) {
           </h1>
         </ClipReveal>
         <ClipReveal delay={0.15}>
-          <p className="text-lg text-muted-foreground mb-8">{t('subtitle')}</p>
+          <p className="text-lg md:text-xl text-muted-foreground mb-8">{t('subtitle')}</p>
         </ClipReveal>
 
         <div className="flex justify-center">
@@ -64,39 +64,35 @@ export default function CareerPage({ career, locale, projects = [] }: Props) {
         <SectionHeading icon={Briefcase} label={t('work')} />
 
         <div className="relative mt-10">
-          <div className="absolute left-[19px] md:left-[23px] top-0 bottom-0 w-px bg-gradient-to-b from-primary/60 via-primary/20 to-transparent" />
-
           <div className="space-y-8">
             {career.workHistory.map((job, i) => (
-              <motion.div key={job.id} {...fadeUp(i, reduce)} className="relative flex gap-5 md:gap-7">
-                <div className="relative z-10 mt-6 flex-shrink-0">
-                  <div
-                    className={`w-[10px] h-[10px] md:w-3 md:h-3 rounded-full border-2 ${
-                      job.current
-                        ? 'border-primary bg-primary'
-                        : 'border-primary/50 bg-background'
-                    }`}
-                    style={job.current ? { animation: 'pulse-dot 1.8s ease-in-out infinite' } : undefined}
-                  />
-                </div>
-
+              <motion.div key={job.id} {...fadeUp(i, reduce)}>
                 <div
-                  className={`flex-1 glass-card p-6 md:p-7 transition-all duration-300 ${
+                  className={`relative glass-card p-6 md:p-7 transition-all duration-300 ${
                     job.current ? 'glow-gold border-primary/25' : 'hover:border-primary/20'
                   }`}
                 >
+                  <span
+                    aria-hidden
+                    className={`absolute top-3 left-3 w-2.5 h-2.5 rounded-full ${
+                      job.current
+                        ? 'bg-primary shadow-md shadow-primary/40'
+                        : 'border-2 border-primary/50 bg-background'
+                    }`}
+                    style={job.current ? { animation: 'pulse-dot 1.8s ease-in-out infinite' } : undefined}
+                  />
                   <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
                     <div>
-                      <h3 className="font-heading font-bold text-base md:text-lg">
+                      <h3 className="font-heading font-bold text-base md:text-lg lg:text-xl">
                         {isRu ? job.position.ru : job.position.en}
                       </h3>
-                      <p className="text-sm text-muted-foreground mt-0.5">
+                      <p className="text-sm md:text-base text-muted-foreground mt-0.5">
                         {isRu ? job.company.ru : job.company.en}
                       </p>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
                       {job.current && (
-                        <Badge variant="success" className="text-xs gap-1.5">
+                        <Badge variant="success" className="text-xs md:text-sm gap-1.5">
                           <span
                             className="w-1.5 h-1.5 rounded-full bg-emerald-400"
                             style={{ animation: 'pulse-dot 1.8s ease-in-out infinite' }}
@@ -104,13 +100,13 @@ export default function CareerPage({ career, locale, projects = [] }: Props) {
                           {t('currentRole')}
                         </Badge>
                       )}
-                      <span className="text-xs font-mono text-muted-foreground bg-muted px-2 py-1 rounded">
+                      <span className="text-xs md:text-sm font-mono text-muted-foreground bg-muted px-2 py-1 md:px-2.5 rounded">
                         {formatMonthYear(job.startDate, locale)} — {job.endDate ? formatMonthYear(job.endDate, locale) : t('present')}
                       </span>
                     </div>
                   </div>
 
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                  <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed mb-4">
                     {isRu ? job.description.ru : job.description.en}
                   </p>
 
@@ -119,7 +115,7 @@ export default function CareerPage({ career, locale, projects = [] }: Props) {
                       {job.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-2 py-0.5 rounded text-xs font-mono text-muted-foreground bg-muted border border-border"
+                          className="px-2 py-0.5 md:px-2.5 rounded text-xs md:text-sm font-mono text-muted-foreground bg-muted border border-border"
                         >
                           {tech}
                         </span>
@@ -158,14 +154,14 @@ export default function CareerPage({ career, locale, projects = [] }: Props) {
                             >
                               <div className="pt-4 mt-4 border-t border-border/50 space-y-4">
                                 {fullDesc && (
-                                  <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+                                  <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
                                     {fullDesc}
                                   </p>
                                 )}
                                 {hasAch && (
                                   <ul className="space-y-2">
                                     {job.achievements!.map((ach, k) => (
-                                      <li key={k} className="flex gap-2 text-sm text-muted-foreground leading-relaxed">
+                                      <li key={k} className="flex gap-2 text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed">
                                         <span className="text-primary shrink-0 mt-1.5">—</span>
                                         <span>{isRu ? ach.ru : ach.en}</span>
                                       </li>
@@ -201,20 +197,20 @@ export default function CareerPage({ career, locale, projects = [] }: Props) {
                   <GraduationCap className="h-5 w-5 text-primary" strokeWidth={1.75} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-heading font-bold text-base">
+                  <h3 className="font-heading font-bold text-base md:text-lg lg:text-xl">
                     {isRu ? edu.institution.ru : edu.institution.en}
                   </h3>
-                  <p className="text-sm text-muted-foreground mt-0.5">
+                  <p className="text-sm md:text-base text-muted-foreground mt-0.5">
                     {isRu ? edu.degree.ru : edu.degree.en},{' '}
                     {isRu ? edu.field.ru : edu.field.en}
                   </p>
                 </div>
-                <Badge variant="outline" className="font-mono text-xs shrink-0">
+                <Badge variant="outline" className="font-mono text-xs md:text-sm shrink-0">
                   {edu.startYear}–{edu.endYear}
                 </Badge>
               </div>
               {edu.description && (
-                <p className="text-sm text-muted-foreground leading-relaxed pl-[52px]">
+                <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed pl-[52px]">
                   {isRu ? edu.description.ru : edu.description.en}
                 </p>
               )}
@@ -225,8 +221,8 @@ export default function CareerPage({ career, locale, projects = [] }: Props) {
                 if (linked.length === 0) return null;
                 return (
                   <div className="mt-4 pt-4 border-t border-border/50 pl-[52px]">
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2 flex items-center gap-1.5">
-                      <FolderOpen className="h-3 w-3 text-primary" />
+                    <p className="text-xs md:text-sm uppercase tracking-[0.2em] text-muted-foreground mb-2 flex items-center gap-1.5">
+                      <FolderOpen className="h-3 w-3 md:h-3.5 md:w-3.5 text-primary" />
                       {isRu ? 'Проекты во время обучения' : 'Projects during studies'}
                     </p>
                     <ul className="space-y-1.5">
@@ -234,12 +230,12 @@ export default function CareerPage({ career, locale, projects = [] }: Props) {
                         <li key={p.slug}>
                           <Link
                             href={`/projects/${p.slug}`}
-                            className="group flex items-start gap-2 text-sm hover:text-primary transition-colors"
+                            className="group flex items-start gap-2 text-sm md:text-base hover:text-primary transition-colors"
                           >
                             <span className="text-primary/40 group-hover:text-primary shrink-0 mt-0.5">→</span>
                             <span className="min-w-0">
                               <span className="font-medium">{isRu ? p.title.ru : p.title.en}</span>
-                              <span className="text-xs text-muted-foreground ml-2">
+                              <span className="text-xs md:text-sm text-muted-foreground ml-2">
                                 {isRu ? p.shortDescription.ru : p.shortDescription.en}
                               </span>
                             </span>
@@ -266,14 +262,14 @@ export default function CareerPage({ career, locale, projects = [] }: Props) {
               className="glass-card p-5 flex items-start justify-between gap-3 hover:glow-gold hover:border-primary/20 transition-all duration-300 group"
             >
               <div className="min-w-0">
-                <h3 className="font-semibold text-sm group-hover:text-primary transition-colors">
+                <h3 className="font-semibold text-sm md:text-base lg:text-lg group-hover:text-primary transition-colors">
                   {isRu ? cert.title.ru : cert.title.en}
                 </h3>
-                <p className="text-xs text-muted-foreground mt-1 font-mono">
+                <p className="text-xs md:text-sm text-muted-foreground mt-1 font-mono">
                   {isRu ? cert.issuer.ru : cert.issuer.en} · {formatMonthYear(cert.date, locale)}
                 </p>
                 {cert.credentialId && (
-                  <p className="text-xs text-muted-foreground mt-0.5 font-mono">
+                  <p className="text-xs md:text-sm text-muted-foreground mt-0.5 font-mono">
                     ID: {cert.credentialId}
                   </p>
                 )}
@@ -307,22 +303,22 @@ export default function CareerPage({ career, locale, projects = [] }: Props) {
 
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
-                    <h3 className="font-heading font-bold text-sm md:text-base">
+                    <h3 className="font-heading font-bold text-sm md:text-base lg:text-lg">
                       {isRu ? pub.title.ru : pub.title.en}
                     </h3>
-                    <Badge variant="outline" className="font-mono text-xs shrink-0">
+                    <Badge variant="outline" className="font-mono text-xs md:text-sm shrink-0">
                       {pub.year}
                     </Badge>
                   </div>
 
                   {pub.journal && (
-                    <p className="text-sm text-muted-foreground italic mb-3">
+                    <p className="text-sm md:text-base text-muted-foreground italic mb-3">
                       {isRu ? pub.journal.ru : pub.journal.en}
                     </p>
                   )}
 
                   {pub.abstract && (
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                    <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed mb-3">
                       {isRu ? pub.abstract.ru : pub.abstract.en}
                     </p>
                   )}
@@ -332,9 +328,9 @@ export default function CareerPage({ career, locale, projects = [] }: Props) {
                       href={`https://doi.org/${pub.doi}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs text-primary hover:underline font-mono"
+                      className="inline-flex items-center gap-1.5 text-xs md:text-sm text-primary hover:underline font-mono"
                     >
-                      <ExternalLink className="h-3 w-3" />
+                      <ExternalLink className="h-3 w-3 md:h-3.5 md:w-3.5" />
                       DOI: {pub.doi}
                     </a>
                   )}
@@ -351,9 +347,9 @@ export default function CareerPage({ career, locale, projects = [] }: Props) {
 
 function StatPill({ value, label }: { value: string; label: string }) {
   return (
-    <div className="flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-primary/15 whitespace-nowrap">
-      <span className="text-lg font-bold gradient-text">{value}</span>
-      <span className="text-xs text-muted-foreground">{label}</span>
+    <div className="flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 rounded-full glass-card border border-primary/15 whitespace-nowrap">
+      <span className="text-lg md:text-xl font-bold gradient-text">{value}</span>
+      <span className="text-xs md:text-sm text-muted-foreground">{label}</span>
     </div>
   );
 }

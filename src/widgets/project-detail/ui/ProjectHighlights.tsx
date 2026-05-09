@@ -41,7 +41,7 @@ function HighlightCard({ highlight, delay }: { highlight: Highlight; delay: numb
       <div className="font-heading text-2xl md:text-3xl font-black text-primary leading-none">
         <AnimatedValue value={highlight.value} inView={inView} delay={delay} />
       </div>
-      <p className="mt-1.5 text-xs text-muted-foreground leading-snug">{label}</p>
+      <p className="mt-1.5 text-xs md:text-sm text-muted-foreground leading-snug">{label}</p>
     </div>
   );
 }

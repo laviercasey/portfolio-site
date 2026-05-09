@@ -1,15 +1,13 @@
 'use client';
 
-import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { useReducedMotion } from 'framer-motion';
 import {
   Briefcase,
   GraduationCap,
   Star,
   FolderKanban,
   BookOpen,
-  ChevronDown,
 } from 'lucide-react';
 import { ClipReveal } from '@/shared/ui';
 import type { HomepageContent } from '@/entities/content';
@@ -24,7 +22,6 @@ export default function AboutSection({ content, projects = [] }: AboutSectionPro
   const t = useTranslations('about');
   const locale = useLocale();
   const shouldReduceMotion = useReducedMotion();
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const bio = locale === 'ru' ? content.about.bioRu : content.about.bioEn;
   const bioFull = locale === 'ru' ? content.about.bioFullRu : content.about.bioFullEn;
@@ -51,15 +48,15 @@ export default function AboutSection({ content, projects = [] }: AboutSectionPro
           </span>
         </ClipReveal>
 
-        <div className="grid grid-cols-12 gap-4 md:gap-5">
+        <div className="grid grid-cols-12 gap-4 md:gap-5 md:items-start">
 
           {vis?.showAboutGif !== false && (
             <ClipReveal
               direction="left"
               delay={0.1}
-              className="col-span-12 md:col-span-5 md:row-span-2"
+              className="col-span-12 md:col-span-5"
             >
-              <div className="relative h-[360px] md:h-full min-h-[400px] rounded-2xl overflow-hidden group border border-white/10 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+              <div className="relative h-[360px] md:h-[440px] rounded-2xl overflow-hidden group border border-white/10 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
                 {content.about.gifUrl ? (
                   (() => {
                     const url = content.about.gifUrl;
@@ -100,61 +97,31 @@ export default function AboutSection({ content, projects = [] }: AboutSectionPro
 
           {vis?.showAboutBio !== false && (
             <ClipReveal direction="up" delay={0.15} className={`col-span-12 ${vis?.showAboutGif !== false ? 'md:col-span-7' : 'md:col-span-12'}`}>
-              <div className="glass-card p-7 h-full flex flex-col justify-between min-h-[180px]">
-                <div>
-                  <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 leading-tight">
-                    {t('title')}
-                  </h2>
-                  <p className="text-muted-foreground leading-relaxed whitespace-pre-line">{bio}</p>
-
+              <div className="glass-card p-7 flex flex-col h-[360px] md:h-[440px]">
+                <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 leading-tight shrink-0">
+                  {t('title')}
+                </h2>
+                <div className="flex-1 overflow-y-auto pr-2 -mr-2">
+                  <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed whitespace-pre-line">{bio}</p>
                   {hasFullBio && (
-                    <AnimatePresence initial={false}>
-                      {isExpanded && (
-                        <motion.div
-                          key="full-bio"
-                          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
-                          animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, height: 'auto' }}
-                          exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
-                          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                          className="overflow-hidden"
-                        >
-                          <div className="pt-4 mt-4 border-t border-white/8">
-                            <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
-                              {bioFull}
-                            </p>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    <div className="pt-4 mt-4 border-t border-white/8">
+                      <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
+                        {bioFull}
+                      </p>
+                    </div>
                   )}
                 </div>
-
-                {hasFullBio && (
-                  <button
-                    type="button"
-                    onClick={() => setIsExpanded((v) => !v)}
-                    className="mt-5 self-start inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-primary hover:text-primary/80 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded"
-                    aria-expanded={isExpanded}
-                  >
-                    <span>{isExpanded ? t('readLess') : t('readMore')}</span>
-                    <ChevronDown
-                      className={`h-3.5 w-3.5 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
-                      strokeWidth={2}
-                    />
-                  </button>
-                )}
               </div>
             </ClipReveal>
           )}
 
-          <div className={`col-span-12 ${vis?.showAboutGif !== false ? 'md:col-span-7' : 'md:col-span-12'}`}>
-            <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 md:gap-4">
+          <div className="col-span-12">
+            <div className="grid grid-cols-3 sm:grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-3 md:gap-4">
               {statItems.map(({ icon: Icon, value, label, color, bg }, i) => (
                 <ClipReveal
                   key={label}
                   direction="up"
                   delay={shouldReduceMotion ? 0 : 0.2 + i * 0.06}
-                  className={i >= 3 ? 'col-span-1 sm:col-span-1' : ''}
                 >
                   <div className="glass-card p-4 md:p-5 flex flex-col items-center justify-center text-center h-full hover:border-primary/30 transition-all duration-300 group">
                     <div className={`p-2 rounded-xl ${bg} mb-2.5`}>

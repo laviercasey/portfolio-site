@@ -67,8 +67,8 @@ export default function WorkHistoryTimeline({ career }: WorkHistoryTimelineProps
                   }`}>
                     <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
                       <div>
-                        <h3 className="font-heading font-bold text-lg leading-tight">{position}</h3>
-                        <p className="text-sm text-muted-foreground mt-0.5">{company}</p>
+                        <h3 className="font-heading font-bold text-lg lg:text-xl leading-tight">{position}</h3>
+                        <p className="text-sm md:text-base text-muted-foreground mt-0.5">{company}</p>
                       </div>
                       <div className="flex items-center gap-2 shrink-0">
                         {job.current && (
@@ -85,7 +85,7 @@ export default function WorkHistoryTimeline({ career }: WorkHistoryTimelineProps
                         </span>
                       </div>
                     </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{description}</p>
+                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-4">{description}</p>
                     {job.technologies && job.technologies.length > 0 && (
                       <div className="flex flex-wrap gap-1.5">
                         {job.technologies.map((tech) => (

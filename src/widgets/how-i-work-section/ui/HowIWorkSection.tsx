@@ -102,9 +102,22 @@ export default function HowIWorkSection({ content }: Props) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const pauseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const firstDescRef = useRef<HTMLParagraphElement | null>(null);
+  const [descBoxHeight, setDescBoxHeight] = useState<number | null>(null);
 
   const hw = content.howIWork;
   const steps = hw?.steps ?? [];
+
+  useEffect(() => {
+    const node = firstDescRef.current;
+    if (!node) return;
+    const update = () => setDescBoxHeight(node.offsetHeight);
+    update();
+    if (typeof ResizeObserver === 'undefined') return;
+    const ro = new ResizeObserver(update);
+    ro.observe(node);
+    return () => ro.disconnect();
+  }, [isRu, steps.length]);
 
   useEffect(() => {
     if (isInView && !isPlaying) { setIsPlaying(true); setActiveStep(0); }
@@ -220,27 +233,21 @@ export default function HowIWorkSection({ content }: Props) {
                       </span>
                     </div>
 
-                    <h3 className={`font-heading font-bold text-base mb-2 transition-colors duration-300 ${isActive ? 'text-foreground' : 'text-muted-foreground/60 group-hover:text-muted-foreground'}`}>
+                    <h3 className={`font-heading font-bold text-base lg:text-lg mb-2 transition-colors duration-300 ${isActive ? 'text-foreground' : 'text-muted-foreground/60 group-hover:text-muted-foreground'}`}>
                       {isRu ? step.titleRu : step.titleEn}
                     </h3>
 
-                    <AnimatePresence mode="wait">
-                      {isActive && (
-                        <motion.p
-                          key={`desc-${i}`}
-                          className="text-sm text-muted-foreground leading-relaxed"
-                          initial={{ opacity: 0, y: 8 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -4 }}
-                          transition={{ duration: 0.35 }}
-                        >
-                          {isRu ? step.descRu : step.descEn}
-                        </motion.p>
-                      )}
-                    </AnimatePresence>
+                    <p
+                      ref={i === 0 ? firstDescRef : undefined}
+                      className={`text-sm lg:text-base text-muted-foreground leading-relaxed transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0'} ${i !== 0 ? 'overflow-y-auto pr-1' : ''}`}
+                      style={i !== 0 && descBoxHeight !== null ? { height: descBoxHeight } : undefined}
+                      aria-hidden={!isActive}
+                    >
+                      {isRu ? step.descRu : step.descEn}
+                    </p>
 
-                    {isActive && isPlaying && (
-                      <div className="mt-3 h-0.5 w-full bg-white/5 rounded-full overflow-hidden">
+                    <div className="mt-3 h-0.5 w-full bg-white/5 rounded-full overflow-hidden">
+                      {isActive && isPlaying && (
                         <motion.div
                           className={`h-full rounded-full origin-left ${isPaused ? 'bg-amber-400/70' : 'bg-primary/50'}`}
                           initial={{ scaleX: 0 }}
@@ -248,8 +255,8 @@ export default function HowIWorkSection({ content }: Props) {
                           transition={{ duration: (isPaused ? PAUSE_DURATION : STEP_DURATION) / 1000, ease: 'linear' }}
                           key={`timer-${activeStep}-${isPaused ? 'pause' : 'play'}`}
                         />
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </button>
                 );
               })}
@@ -348,7 +355,7 @@ export default function HowIWorkSection({ content }: Props) {
               <h3 className="font-heading text-xl md:text-2xl font-bold mb-3">
                 {isRu ? (hw?.philosophyTitleRu || 'Философия работы') : (hw?.philosophyTitleEn || 'Work Philosophy')}
               </h3>
-              <p className="text-muted-foreground leading-relaxed mb-8 max-w-2xl">
+              <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl">
                 {isRu ? (hw?.philosophyTextRu || '') : (hw?.philosophyTextEn || '')}
               </p>
 
@@ -358,8 +365,8 @@ export default function HowIWorkSection({ content }: Props) {
                     <Wallet className="h-5 w-5 text-primary" strokeWidth={1.5} />
                   </div>
                   <div>
-                    <p className="font-heading font-bold text-sm mb-0.5">{isRu ? (hw?.payment1Ru || '') : (hw?.payment1En || '')}</p>
-                    <p className="text-xs text-muted-foreground">{isRu ? (hw?.payment1DescRu || '') : (hw?.payment1DescEn || '')}</p>
+                    <p className="font-heading font-bold text-sm md:text-base mb-0.5">{isRu ? (hw?.payment1Ru || '') : (hw?.payment1En || '')}</p>
+                    <p className="text-xs md:text-sm text-muted-foreground">{isRu ? (hw?.payment1DescRu || '') : (hw?.payment1DescEn || '')}</p>
                   </div>
                 </div>
 
@@ -368,8 +375,8 @@ export default function HowIWorkSection({ content }: Props) {
                     <PackageCheck className="h-5 w-5 text-emerald-400" strokeWidth={1.5} />
                   </div>
                   <div>
-                    <p className="font-heading font-bold text-sm mb-0.5">{isRu ? (hw?.payment2Ru || '') : (hw?.payment2En || '')}</p>
-                    <p className="text-xs text-muted-foreground">{isRu ? (hw?.payment2DescRu || '') : (hw?.payment2DescEn || '')}</p>
+                    <p className="font-heading font-bold text-sm md:text-base mb-0.5">{isRu ? (hw?.payment2Ru || '') : (hw?.payment2En || '')}</p>
+                    <p className="text-xs md:text-sm text-muted-foreground">{isRu ? (hw?.payment2DescRu || '') : (hw?.payment2DescEn || '')}</p>
                   </div>
                 </div>
               </div>

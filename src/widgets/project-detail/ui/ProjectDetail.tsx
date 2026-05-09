@@ -134,11 +134,11 @@ export default function ProjectDetail({ project }: Props) {
             <div>
               <div className="flex items-center gap-2 mb-4 flex-wrap">
                 <StatusBadge status={project.status} />
-                <Badge variant="outline" className="font-mono text-xs">
+                <Badge variant="outline" className="font-mono text-xs md:text-sm">
                   {project.category}
                 </Badge>
                 {(project.stars ?? 0) > 0 && (
-                  <span className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-mono text-yellow-400 bg-yellow-400/10 border border-yellow-400/20">
+                  <span className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs md:text-sm font-mono text-yellow-400 bg-yellow-400/10 border border-yellow-400/20">
                     <Star className="h-3.5 w-3.5 fill-yellow-400" />
                     {project.stars} {t('stars')}
                   </span>
@@ -148,7 +148,7 @@ export default function ProjectDetail({ project }: Props) {
               <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-black mb-4 leading-[1.05]">
                 {title}
               </h1>
-              <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
+              <p className="text-muted-foreground text-base md:text-lg lg:text-xl leading-relaxed">
                 {shortDesc}
               </p>
             </div>
@@ -181,7 +181,7 @@ export default function ProjectDetail({ project }: Props) {
 
       {hasHighlights && (
         <section className="mb-10 lg:mb-14 space-y-4">
-          <h2 className="font-heading text-lg font-bold flex items-center gap-2">
+          <h2 className="font-heading text-lg lg:text-xl font-bold flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-primary" />
             {t('highlightsTitle')}
           </h2>
@@ -228,11 +228,11 @@ export default function ProjectDetail({ project }: Props) {
 
           {!hasStory && (
             <section className="glass-card p-6 rounded-xl">
-              <h2 className="font-heading text-lg font-bold mb-4 flex items-center gap-2">
+              <h2 className="font-heading text-lg lg:text-xl font-bold mb-4 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                 {t('fullDescription')}
               </h2>
-              <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
+              <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
                 {description}
               </p>
             </section>
@@ -240,17 +240,17 @@ export default function ProjectDetail({ project }: Props) {
 
           {goalDesc && !hasProblem && (
             <section className="glass-card p-6 rounded-xl">
-              <h2 className="font-heading text-lg font-bold mb-4 flex items-center gap-2">
+              <h2 className="font-heading text-lg lg:text-xl font-bold mb-4 flex items-center gap-2">
                 <Target className="h-4 w-4 text-primary" />
                 {t('goal')}
               </h2>
-              <p className="text-muted-foreground leading-relaxed">{goalDesc}</p>
+              <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed">{goalDesc}</p>
             </section>
           )}
 
           {hasGallery && (
             <section className="space-y-4">
-              <h2 className="font-heading text-lg font-bold flex items-center gap-2">
+              <h2 className="font-heading text-lg lg:text-xl font-bold flex items-center gap-2">
                 <Images className="h-4 w-4 text-primary" />
                 {t('galleryTitle')}
               </h2>
@@ -261,13 +261,13 @@ export default function ProjectDetail({ project }: Props) {
 
         <aside className="lg:sticky lg:top-24 lg:self-start space-y-4">
           <div className="glass-card rounded-xl p-5">
-            <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground mb-3 flex items-center gap-2">
+            <h3 className="font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-muted-foreground mb-3 flex items-center gap-2">
               <Layers className="h-3.5 w-3.5 text-primary" />
               {t('techStack')}
             </h3>
             <div className="flex flex-wrap gap-1.5">
               {project.techStack.map((tech) => (
-                <Badge key={tech} variant="secondary" className="text-xs py-1 px-2 font-mono">
+                <Badge key={tech} variant="secondary" className="text-xs md:text-sm py-1 px-2 md:px-2.5 font-mono">
                   {tech}
                 </Badge>
               ))}
@@ -276,7 +276,7 @@ export default function ProjectDetail({ project }: Props) {
 
           {hasCreds && (
             <div>
-              <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground mb-3 flex items-center gap-2">
+              <h3 className="font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-muted-foreground mb-3 flex items-center gap-2">
                 <ExternalLink className="h-3.5 w-3.5 text-primary" />
                 {t('tryItTitle')}
               </h3>

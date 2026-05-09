@@ -60,12 +60,12 @@ export default function EducationSnapshot({ career }: EducationSnapshotProps) {
 
                   <div className="flex-1 glass-card p-5 hover:border-primary/20 transition-all duration-300">
                     <div className="flex items-start justify-between gap-3">
-                      <h3 className="font-heading font-bold text-sm leading-snug">{institution}</h3>
+                      <h3 className="font-heading font-bold text-sm md:text-base leading-snug">{institution}</h3>
                       <span className="text-xs font-mono text-muted-foreground bg-muted px-2 py-0.5 rounded shrink-0">
                         {edu.startYear}–{edu.endYear}
                       </span>
                     </div>
-                    <p className="text-sm text-muted-foreground mt-1">{degree}, {field}</p>
+                    <p className="text-sm md:text-base text-muted-foreground mt-1">{degree}, {field}</p>
                   </div>
                 </motion.div>
               );

@@ -115,8 +115,8 @@ export default function ProjectCarousel({ projects, visibility }: ProjectCarouse
                       </span>
                     )}
                   </div>
-                  <h3 className="font-heading text-2xl font-bold mb-3 leading-tight">{title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">{description}</p>
+                  <h3 className="font-heading text-2xl lg:text-3xl font-bold mb-3 leading-tight">{title}</h3>
+                  <p className="text-muted-foreground text-sm md:text-base lg:text-lg leading-relaxed mb-6">{description}</p>
                   {visibility?.showProjectTechStack !== false && (
                     <div className="flex flex-wrap gap-1.5 mb-6">
                       {project.techStack.slice(0, 5).map((tech) => (

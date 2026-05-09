@@ -135,22 +135,22 @@ export default function ProjectCard({ project, index = 0 }: ProjectCardProps) {
       </div>
 
       <div className="relative p-5 flex flex-col flex-1">
-        <h3 className="font-heading font-bold text-base mb-2 leading-snug group-hover:text-primary transition-colors">
+        <h3 className="font-heading font-bold text-base lg:text-lg mb-2 leading-snug group-hover:text-primary transition-colors">
           {title}
         </h3>
-        <p className="text-sm text-muted-foreground mb-3 flex-1 leading-relaxed">{description}</p>
+        <p className="text-sm lg:text-base text-muted-foreground mb-3 flex-1 leading-relaxed">{description}</p>
 
         <div className="flex flex-wrap gap-1.5 mb-3">
           {project.techStack.slice(0, 3).map((tech) => (
             <span
               key={tech}
-              className="px-2 py-0.5 rounded text-xs font-mono text-muted-foreground bg-muted border border-border"
+              className="px-2 py-0.5 md:px-2.5 rounded text-xs md:text-sm font-mono text-muted-foreground bg-muted border border-border"
             >
               {tech}
             </span>
           ))}
           {project.techStack.length > 3 && (
-            <span className="px-2 py-0.5 rounded text-xs font-mono text-muted-foreground bg-muted border border-border">
+            <span className="px-2 py-0.5 md:px-2.5 rounded text-xs md:text-sm font-mono text-muted-foreground bg-muted border border-border">
               +{project.techStack.length - 3}
             </span>
           )}
