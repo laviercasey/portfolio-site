@@ -116,10 +116,10 @@ func TestServicesService_CreateService_Success(t *testing.T) {
 	got, err := svc.CreateService(context.Background(), model.CreateServiceInput{
 		Slug: "telegram-bots", Num: "01",
 		IconKey: "bot", VisualKey: "terminal", Accent: "#5eb3ff",
-		Title: model.I18n{"ru": "T", "en": "T"},
-		Lead:  model.I18n{"ru": "L", "en": "L"},
+		Title:   model.I18n{"ru": "T", "en": "T"},
+		Lead:    model.I18n{"ru": "L", "en": "L"},
 		Bullets: model.ServiceBullets{Ru: []string{"b1"}, En: []string{"b1"}},
-		Stack: "stack", Timeline: model.I18n{"ru": "1w", "en": "1w"},
+		Stack:   "stack", Timeline: model.I18n{"ru": "1w", "en": "1w"},
 		PriceRu: "100", PriceEn: "$100",
 		CaseProjects: []model.ServiceCaseProject{{Slug: "x", Name: "X"}},
 		Order:        10,
