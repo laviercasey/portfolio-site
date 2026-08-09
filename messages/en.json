@@ -93,7 +93,8 @@
     "yearsExp": "years of experience",
     "certsCount": "certificates",
     "pubsCount": "publications",
-    "currentRole": "Current role"
+    "currentRole": "Current role",
+    "downloadCv": "Download CV (PDF)"
   },
   "contact": {
     "title": "Contact & Collaboration",

@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { GraduationCap, Briefcase, Award, BookOpen, ExternalLink, ChevronDown, FolderOpen } from 'lucide-react';
+import { GraduationCap, Briefcase, Award, BookOpen, ExternalLink, ChevronDown, FolderOpen, Download } from 'lucide-react';
 import { ClipReveal, Badge, Button } from '@/shared/ui';
-import { Link } from '@/shared/config';
+import { Link, siteConfig } from '@/shared/config';
 import type { CareerContent } from '@/entities/career';
 import type { Project } from '@/entities/project';
 import { formatMonthYear } from '@/shared/lib';
@@ -57,6 +57,15 @@ export default function CareerPage({ career, locale, projects = [] }: Props) {
             <StatPill value={String(career.certificates.length)} label={t('certsCount')} />
             <StatPill value={String(career.publications.length)} label={t('pubsCount')} />
           </div>
+        </div>
+
+        <div className="mt-8 flex justify-center">
+          <Button asChild variant="outline" className="gap-2">
+            <a href={siteConfig.cvUrl} download>
+              <Download className="h-4 w-4" />
+              {t('downloadCv')}
+            </a>
+          </Button>
         </div>
       </section>
 

@@ -93,7 +93,8 @@
     "yearsExp": "лет опыта",
     "certsCount": "сертификатов",
     "pubsCount": "публикаций",
-    "currentRole": "Текущая позиция"
+    "currentRole": "Текущая позиция",
+    "downloadCv": "Скачать резюме (PDF)"
   },
   "contact": {
     "title": "Контакты и сотрудничество",

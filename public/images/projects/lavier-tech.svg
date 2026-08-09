@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="lavier.tech bilingual personal site">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="82%">
+      <stop offset="0%" stop-color="#33261a"/>
+      <stop offset="60%" stop-color="#17110c"/>
+      <stop offset="100%" stop-color="#0a0706"/>
+    </radialGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d4a843" stop-opacity="0.15"/>
+      <stop offset="50%" stop-color="#e07040" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#c45a30" stop-opacity="0.15"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+
+  <g stroke="#d4a843" stroke-width="0.5" opacity="0.06">
+    <path d="M0 168 H1200 M0 336 H1200 M0 504 H1200"/>
+    <path d="M200 0 V675 M400 0 V675 M600 0 V675 M800 0 V675 M1000 0 V675"/>
+  </g>
+
+  <g font-family="ui-monospace, 'JetBrains Mono', monospace">
+    <g transform="translate(600 150)">
+      <rect x="-235" y="-58" width="470" height="116" rx="14"
+            fill="#d4a843" fill-opacity="0.06" stroke="#d4a843" stroke-opacity="0.35" stroke-width="1.2"/>
+      <text x="-205" y="-24" font-size="17" fill="#c45a30" opacity="0.75" letter-spacing="1">projects.title  JSONB</text>
+      <text x="-205" y="8" font-size="19" fill="#d4a843" opacity="0.95">{ "en": "…",</text>
+      <text x="-205" y="36" font-size="19" fill="#e07040" opacity="0.95">&#160;&#160;"ru": "…" }</text>
+    </g>
+
+    <path d="M480 195 C 400 250 380 275 355 320" fill="none" stroke="url(#edge)" stroke-width="2"/>
+    <path d="M720 195 C 800 250 820 275 845 320" fill="none" stroke="url(#edge)" stroke-width="2"/>
+
+    <g transform="translate(355 430)">
+      <rect x="-185" y="-110" width="370" height="220" rx="12"
+            fill="#0f0b08" fill-opacity="0.85" stroke="#d4a843" stroke-opacity="0.28" stroke-width="1.2"/>
+      <path d="M-185 -78 H185" stroke="#d4a843" stroke-opacity="0.22" stroke-width="1"/>
+      <circle cx="-160" cy="-94" r="4.5" fill="#c45a30" opacity="0.7"/>
+      <circle cx="-144" cy="-94" r="4.5" fill="#d4a843" opacity="0.5"/>
+      <circle cx="-128" cy="-94" r="4.5" fill="#e07040" opacity="0.35"/>
+      <text x="150" y="-89" text-anchor="end" font-size="15" fill="#d4a843" opacity="0.8" letter-spacing="2">/EN</text>
+      <rect x="-150" y="-52" width="210" height="16" rx="8" fill="#d4a843" opacity="0.35"/>
+      <rect x="-150" y="-20" width="300" height="10" rx="5" fill="#d4a843" opacity="0.14"/>
+      <rect x="-150" y="2"   width="270" height="10" rx="5" fill="#d4a843" opacity="0.14"/>
+      <rect x="-150" y="24"  width="290" height="10" rx="5" fill="#d4a843" opacity="0.14"/>
+      <rect x="-150" y="56"  width="120" height="26" rx="13" fill="#e07040" opacity="0.25"/>
+    </g>
+
+    <g transform="translate(845 430)">
+      <rect x="-185" y="-110" width="370" height="220" rx="12"
+            fill="#0f0b08" fill-opacity="0.85" stroke="#e07040" stroke-opacity="0.28" stroke-width="1.2"/>
+      <path d="M-185 -78 H185" stroke="#e07040" stroke-opacity="0.22" stroke-width="1"/>
+      <circle cx="-160" cy="-94" r="4.5" fill="#c45a30" opacity="0.7"/>
+      <circle cx="-144" cy="-94" r="4.5" fill="#d4a843" opacity="0.5"/>
+      <circle cx="-128" cy="-94" r="4.5" fill="#e07040" opacity="0.35"/>
+      <text x="150" y="-89" text-anchor="end" font-size="15" fill="#e07040" opacity="0.8" letter-spacing="2">/RU</text>
+      <rect x="-150" y="-52" width="240" height="16" rx="8" fill="#e07040" opacity="0.35"/>
+      <rect x="-150" y="-20" width="280" height="10" rx="5" fill="#e07040" opacity="0.14"/>
+      <rect x="-150" y="2"   width="300" height="10" rx="5" fill="#e07040" opacity="0.14"/>
+      <rect x="-150" y="24"  width="250" height="10" rx="5" fill="#e07040" opacity="0.14"/>
+      <rect x="-150" y="56"  width="120" height="26" rx="13" fill="#d4a843" opacity="0.25"/>
+    </g>
+
+    <g transform="translate(600 258)">
+      <circle r="26" fill="#d4a843" opacity="0.16" filter="url(#glow)"/>
+      <circle r="15" fill="none" stroke="#d4a843" stroke-opacity="0.7" stroke-width="1.6"/>
+      <path d="M-6 0 L-1.5 5 L7 -5" fill="none" stroke="#d4a843" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="0" y="42" text-anchor="middle" font-size="14" fill="#d4a843" opacity="0.6" letter-spacing="2">HEALTH-GATE</text>
+    </g>
+  </g>
+
+  <text x="600" y="622" text-anchor="middle"
+        font-family="ui-monospace, 'JetBrains Mono', monospace"
+        font-size="20" fill="#d4a843" opacity="0.45"
+        letter-spacing="3">NEXT.JS 16 · GO 1.25 · POSTGRES 16 · CADDY</text>
+</svg>

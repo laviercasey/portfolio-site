@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="MetroPT predictive maintenance sensor timeline">
+  <defs>
+    <radialGradient id="bg" cx="35%" cy="35%" r="90%">
+      <stop offset="0%" stop-color="#2e2419"/>
+      <stop offset="60%" stop-color="#15100b"/>
+      <stop offset="100%" stop-color="#0a0706"/>
+    </radialGradient>
+    <linearGradient id="lead" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e07040" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#e07040" stop-opacity="0.02"/>
+    </linearGradient>
+    <linearGradient id="sig" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d4a843" stop-opacity="0.35"/>
+      <stop offset="55%" stop-color="#d4a843" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#c45a30" stop-opacity="1"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+
+  <g stroke="#d4a843" stroke-width="0.5" opacity="0.06">
+    <path d="M0 168 H1200 M0 336 H1200 M0 504 H1200"/>
+    <path d="M200 0 V675 M400 0 V675 M600 0 V675 M800 0 V675 M1000 0 V675"/>
+  </g>
+
+  <g font-family="ui-monospace, 'JetBrains Mono', monospace">
+    <rect x="700" y="120" width="220" height="380" fill="url(#lead)"/>
+    <path d="M700 120 V500" stroke="#e07040" stroke-width="1.4" stroke-dasharray="6 6" opacity="0.75"/>
+    <path d="M920 120 V500" stroke="#c45a30" stroke-width="1.8" opacity="0.9"/>
+
+    <text x="810" y="104" text-anchor="middle" font-size="17" fill="#e07040" opacity="0.9" letter-spacing="2">30 MIN LEAD</text>
+    <text x="928" y="146" font-size="17" fill="#c45a30" opacity="0.9" letter-spacing="2">AIR LEAK</text>
+
+    <path d="M100 400 H1120" stroke="#d4a843" stroke-width="1" opacity="0.18"/>
+    <path d="M100 300 H1120" stroke="#d4a843" stroke-width="1" stroke-dasharray="3 7" opacity="0.3"/>
+    <text x="1112" y="292" text-anchor="end" font-size="14" fill="#d4a843" opacity="0.55" letter-spacing="1">threshold</text>
+
+    <path d="M100 392 L150 400 L200 384 L250 402 L300 388 L350 398 L400 382 L450 400
+             L500 386 L550 396 L600 378 L650 392 L700 368 L740 348 L780 318 L820 286
+             L860 240 L900 186 L920 150 L960 172 L1000 214 L1040 252 L1080 282 L1120 300"
+          fill="none" stroke="url(#sig)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g opacity="0.35">
+      <path d="M100 428 L200 420 L300 432 L400 418 L500 430 L600 416 L700 424 L800 412 L900 420 L1000 414 L1120 422"
+            fill="none" stroke="#d4a843" stroke-width="1.6"/>
+      <path d="M100 456 L200 462 L300 452 L400 464 L500 454 L600 466 L700 456 L800 462 L900 452 L1000 460 L1120 454"
+            fill="none" stroke="#c45a30" stroke-width="1.6"/>
+    </g>
+
+    <g transform="translate(700 300)">
+      <circle r="22" fill="#e07040" opacity="0.22" filter="url(#glow)"/>
+      <circle r="8" fill="#e07040"/>
+      <circle r="15" fill="none" stroke="#e07040" stroke-width="1.4" opacity="0.6"/>
+    </g>
+
+    <g transform="translate(100 545)" font-size="16" fill="#d4a843" opacity="0.7" letter-spacing="1">
+      <g>
+        <rect x="0" y="-20" width="196" height="32" rx="16" fill="#d4a843" fill-opacity="0.08" stroke="#d4a843" stroke-opacity="0.3"/>
+        <text x="98" y="2" text-anchor="middle">15 SENSORS</text>
+      </g>
+      <g transform="translate(214 0)">
+        <rect x="0" y="-20" width="240" height="32" rx="16" fill="#d4a843" fill-opacity="0.08" stroke="#d4a843" stroke-opacity="0.3"/>
+        <text x="120" y="2" text-anchor="middle">50 563 WINDOWS</text>
+      </g>
+      <g transform="translate(472 0)">
+        <rect x="0" y="-20" width="212" height="32" rx="16" fill="#e07040" fill-opacity="0.10" stroke="#e07040" stroke-opacity="0.35"/>
+        <text x="106" y="2" text-anchor="middle" fill="#e07040">PR-AUC 0.889</text>
+      </g>
+    </g>
+  </g>
+
+  <text x="600" y="632" text-anchor="middle"
+        font-family="ui-monospace, 'JetBrains Mono', monospace"
+        font-size="20" fill="#d4a843" opacity="0.45"
+        letter-spacing="3">PYTHON · GRADIENTBOOSTING · SHAP · ROC-AUC 0.993</text>
+</svg>
