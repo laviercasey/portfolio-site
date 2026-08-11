@@ -36,7 +36,6 @@ func New(deps Deps) chi.Router {
 	r := chi.NewRouter()
 
 	r.Use(chimw.RequestID)
-	r.Use(chimw.RealIP)
 	r.Use(middleware.Logger(deps.Logger))
 	r.Use(middleware.CORS(deps.CORSOrigins))
 	r.Use(chimw.Recoverer)
